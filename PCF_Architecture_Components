@@ -1,0 +1,746 @@
+
+https://www.bmc.com/blogs/saas-vs-paas-vs-iaas-whats-the-difference-and-how-to-choose/
+
+https://12factor.net/
+
+https://docs.cloudfoundry.org/devguide/deploy-apps/prepare-to-deploy.html
+
+*****************************************************************************************************************************************************************************
+
+Login:
+	
+		API URL:	The API endpoint for your Cloud Foundry instance. Also known as the target URL, this is the URL of the Cloud Controller in your Cloud Foundry instance.
+
+		
+Orgs / Spaces / Domains / Users / Operators: Roles, Pg:692
+********************************************************
+		
+Orgs:
+========
+
+organizations - an org is a development account that an individual or multiple collaborators can own and use. All collaborators access an org with user accounts. Collaborators in an org share a resource quota plan, applications, services availability, and custom domains.
+
+	Org Manager
+	Billing Manager	
+	Org Auditor
+
+Spaces:
+========
+spaces - every application and service is scoped to a space. Each org contains at least one space. A space provides users with access to a shared location for application development, deployment, and maintenance. Each space role applies only to a particular space.
+
+Every app is deployed to an app space that belongs to a domain. Every Cloud Foundry instance has a default domain defined. You can specify a non-default, or custom, domain when deploying, provided that the domain is registered and is mapped to the organization which contains the target app space.
+
+
+Domains:
+===========			
+domains - define routes to apps
+
+users - a user account represents an individual person within the context of a PCF application. A user can have different roles in different spaces within an org, governing what level and type of access they have within that space.
+
+
+
+routes - define how to get to an application
+
+a unique route exists to each application in every space
+domain can be mapped to multiple spaces
+route can only be mapped to one space
+same application can be deployed in multiple spaces
+each must have a different, unique URL
+development space route: http://myapp-test.cfapps.io
+production space route: http://myapp.cfapps.io
+
+
+PCF Roles
+================
+
+		PCF Manager
+		Org Manager
+		Org Auditor
+		Space Manager
+		Space Auditor
+		Space Developer
+
+		
+Buildpacks:
+***************
+
+
+Note: The Java buildpack does not support pre-runtime hooks.
+
+
+BOSH/the Ops Manager (deployment automation)
+The User Account and Authentication server (identity management)
+The Gorouter (application and system routing)
+The Cloud Controller (application staging and running)
+Diego (application execution and runtime)
+Loggregator (logs and metric aggregation)
+
+**********************************************************************************	 Authentication  **********************************************************************************
+
+UAA & oAuth
+=============
+
+CF Manages user accounts through 2 UAA servers which support access control as OAuth2 services and can store user information internally, or connect to external user stores through LDAP or SAML.
+	
+	1)		One UAA server grants access to BOSH, and holds accounts for the CF operators who deploy runtimes, services, and other software onto the BOSH layer directly.
+
+	2)		The other UAA server controls access to the Cloud Controller, and determines who can tell it to do what. The Cloud Controller UAA defines different user roles, such as admin, developer, or auditor, and grants them different sets of privileges to run CF commands. The Cloud Controller UAA also scopes the roles to separate, compartmentalized Orgs and Spaces within an installation, to manage and track use.
+
+		Pg 1298
+		Pg 781
+***************************************************************************************	 BOSH  ***************************************************************************************
+
+BOSH
+*********
+Operators deploy Cloud Foundry with BOSH. The BOSH Director is the core orchestrating component in BOSH: it controls VM creation and deployment, as
+well as other software and service lifecycle events. You use HTTPS to ensure secure communication to the BOSH Director.
+BOSH includes the following functionality for security:
+Communicates with the VMs it launches over NATS. Because NATS cannot be accessed from outside Cloud Foundry, this ensures that published
+messages can only originate from a component within your deployment.
+Provides an audit trail through the bosh tasks command. This command shows all actions that an operator has taken with BOSH.
+Allows you to set up individual login accounts for each operator. BOSH operators have root access.
+Note: Pivotal recommends that you deploy the BOSH Director on a subnet that is not publicly accessible, and access the BOSH Director from a
+Jumpbox on the subnet or through VPN.
+
+ Note: BOSH does not encrypt data stored on BOSH VMs. Your IaaS might encrypt this data.
+
+
+BOSH Director:
+**************
+
+
+
+
+How BOSH Works;
+================
+
+https://bosh.io/docs/cli-v2/
+
+bosh create-env manifest.yml ....
+
+BOSH creates and deploys virtual machines (VMs) on top of a physical computing infrastructure, and deploys and runs Cloud Foundry on top of this cloud. 
+
+To configure the deployment, BOSH follows a manifest document.
+
+The CF Cloud Controller runs the apps and other processes on the cloud’s VMs, balancing demand and managing app lifecycles.
+
+The router routes incoming traffic from the world to the VMs that are running the apps that the traffic demands, usually working with a customer-provided load balancer.
+
+	Cloud Foundry designates two types of VMs: 
+	
+	1. The component VMs that constitute the platform’s infrastructure, 
+	2. The host VMs that host apps for the outside world. 
+	
+	Within CF, the Diego system distributes the hosted app load over all of the host VMs, and keeps it running and balanced through demand surges, outages, or other changes. Diego accomplishes this through an auction algorithm.
+
+	To meet demand, multiple host VMs run duplicate instances of the same app. This means that apps must be portable. Cloud Foundry distributes app source code to VMs with everything the VMs need to compile and run the apps locally. This includes the OS stack that the app runs on, and a buildpack containing all languages, libraries, and services that the app uses.
+
+	Before sending an app to a VM, the Cloud Controller stages it for delivery by combining stack, buildpack, and source code into a droplet that the VM can unpack, compile, and run. For simple, standalone apps with no dynamic pointers, the droplet can contain a pre-compiled executable instead of source code, language, and libraries.
+
+******************************************************************************************************************************************************************************
+
+	Manifests
+
+		cf create-app-manifest	<SNAME> -p ./manifest.yml
+		
+	
+
+		@	Is manifest uploaded with applicaiton ? 	No, its only for CF CLI and Controller
+		
+		@	Is the manifest bound to an application ?	
+		
+		@	What commands can be avoided by mentioning them in manifest ? binding service, environment variable
+
+*******************************************************************************************************************************************************************************
+	
+How the Cloud Balances Its Load
+=====================================
+
+Clouds balance their processing loads over multiple machines, optimizing for efficiency and resilience against point failure. A Cloud Foundry installation
+accomplishes this at three levels:
+
+1. BOSH  creates and deploys virtual machines (VMs) on top of a physical computing infrastructure, and deploys and runs Cloud Foundry on top of
+this cloud. To configure the deployment, BOSH follows a manifest document.
+2. The CF Cloud Controller runs the apps and other processes on the cloud’s VMs, balancing demand and managing app lifecycles.
+3. The router routes incoming traffic from the world to the VMs that are running the apps that the traffic demands, usually working with a customerprovided load balancer
+
+	
+	
+Storage:
+==========
+
+	Cloud Foundry uses the git system on GitHub to version-control source code, buildpacks, documentation, and other resources. Developers on the platform also use GitHub for their own apps, custom configurations, and other resources. 
+
+	To store large binary files, such as droplets, CF maintains an internal or external blobstore. 
+	
+	CF uses MySQL to store and share temporary information, such as internal component states.
+
+
+CF Communication:
+===================
+
+Cloud Foundry components communicate with each other by posting messages internally using http and https protocols, and by sending NATS messages to each other directly.
+
+NATS is an open-source messaging system. The NATS server is written in the Go programming language. Client libraries to interface with the server are available for dozens of major programming languages. The core design principles of NATS are performance, scalability, and ease of use.
+
+
+
+
+**********************************************************************************   Routing   **********************************************************************************
+
+Go-router
+===========
+
+route-emitter
+==============
+
+
+*****************************************************************************   Cloud Controller   *****************************************************************************
+The		Cloud	Controller	(CC)	directs	the	deployment	of	applications.	To	push	an	app	to	Cloud	Foundry,	you	target	the	Cloud	Controller.	The	Cloud	Controller then	directs	the	Diego	Brain	through	the	CC-Bridge	components	to	coordinate	individual		Diego	cells	to	stage	and	run	applications.
+The	Cloud	Controller	also	maintain	records	of		orgs,	spaces,	user	roles,		services ,	and	more.
+
+To	keep	applications	available,	cloud	deployments	must	constantly	monitor	their	states	and	reconcile	them	with	their	expected	states,	starting	and stopping	processes	as	required.
+
+The	nsync,	BBS,	and	Cell	Rep	components	work	together	along	a	chain	to	keep	apps	running.	At	one	end	is	the	user.	At	the	other	end	are	the	instances	of applications	running	on	widely-distributed	VMs,	which	may	crash	or	become	unavailable.
+Here	is	how	the	components	work	together:
+	nsync	receives	a	message	from	the	Cloud	Controller	when	the	user	scales	an	app.	It	writes	the	number	of	instances	into	a	DesiredLRP	structure	in	the Diego	BBS	database.	BBS	uses	its	convergence	process	to	monitor	the	DesiredLRP	and	ActualLRP	values.	It	launches	or	kills	application	instances	as	appropriate	to ensure	the	ActualLRP	count	matches	the	DesiredLRP	count.	Cell	Rep	monitors	the	containers	and	provides	the	ActualLRP	value.
+	
+	Blobstore
+The	blobstore	is	a	repository	for	large	binary	files,	which	Github	cannot	easily	manage	because	Github	is	designed	for	code.	The	blobstore	contains	the following:
+Application	code	packages Buildpacks Droplets
+You	can	configure	the	blobstore	as	either	an	internal	server	or	an	external	S3	or	S3-compatible	endpoint.	See	this		Knowledge	Base	article 	for	more information	about	the	blobstore.
+		Diego	Cell
+Application	instances,	application	tasks,	and	staging	tasks	all	run	as	Garden	containers	on	the	Diego	Cell	VMs.	The	Diego	cell	rep	component	manages	the lifecycle	of	those	containers	and	the	processes	running	in	them,	reports	their	status	to	the	Diego	BBS,	and	emits	their	logs	and	metrics	to		Loggregator.
+	
+	
+CAPI:
+=======
+
+CAPI is the entry point for most operations within the Cloud Foundry (CF) platform. You can use it to manage orgs, spaces, and apps, which includes user roles and permissions. You can also use CAPI to manage the services provided by your CF deployment, including provisioning, creating, and binding them to apps.
+
+
+CF currently supports the following clients for CAPI:
+
+Java
+Scripting with the Cloud Foundry Command Line Interface (cf CLI)
+
+
+
+	
+Cloud Controller API (CAPI):
+*******************************
+
+		Cloud Controller
+						Exposes an API for using and managing the Elastic Runtime
+		Cloud Controller Database (CC_DB)
+						The Cloud Controller persists Org/Space/App data in the Cloud Controller Database
+		Blob Store
+						The Cloud Controller persists app packages and droplets to the Blob Store
+		CC-Bridge [stager,cc-uploader,nsync,tps]
+						CC-Bridge translates app specific messages into the generic language of task and LRPs
+
+
+CF controller & Diego Flow:
+==============================
+
+1. The Cloud Controller passes requests to stage and run applications to several components on the Diego Brain.
+
+2. The Diego Brain components translate staging and running requests into Tasks and Long Running Processes (LRPs), then submit these to the
+Bulletin Board System (BBS) through an API over HTTP.
+3. The BBS submits the Tasks and LRPs to the Auctioneer, part of the Diego Brain.
+4. The Auctioneer distributes these Tasks and LRPs to Cells through an Auction. The Diego Brain communicates with Diego Cells using SSL/TLS
+protocol.
+5. Once the Auctioneer assigns a Task or LRP to a Cell, an in-process Executor creates a Garden container in the Cell. The Task or LRP runs in the
+container.
+6. The BBS tracks desired LRPs, running LRP instances, and in-flight Tasks. It also periodically analyzes this information and corrects discrepancies to
+ensure consistency between ActualLRP and DesiredLRP counts.
+7. The Metron Agent, part of the Cell, forwards application logs, errors, and metrics to the Cloud Foundry Loggregator. For more information, see the
+Application Logging in Cloud Foundry topic.
+
+
+CCBridge
+*********
+
+
+nsync, BBS, and Cell Reps
+****************************
+To keep applications available, cloud deployments must constantly monitor their states and reconcile them with their expected states, starting and
+stopping processes as required.
+	
+	
+Deployment Flow:
+=================
+
+	https://docs.cloudfoundry.org/devguide/deploy-apps/deploy-app.html
+	
+	Overview:
+				Between the time that you run cf push and the time that the app is available, Cloud Foundry performs the following tasks:
+
+				Uploads and stores app files
+				Examines and stores app metadata
+				Creates a “droplet” (the Cloud Foundry unit of execution) for the app
+				Selects an appropriate Diego cell to run the droplet
+				Starts the app
+
+				-n to assign a different HOST name for the app
+				--random-route to create a URL that includes the app name and random words
+
+********************************************************************************   Loggregator   *****************************************************************************
+
+Pg 777
+
+Logs, Log Drain, Loggregator & Metrics:
+========================================
+
+Cloud Foundry generates system logs from Cloud Foundry components and app logs from hosted apps
+
+As Cloud Foundry runs, its component and host VMs generate logs and metrics. Cloud Foundry apps also typically generate logs. The Loggregator system aggregates the component metrics and app logs into a structured, usable form, the Firehose. You can use all of the output of the Firehose, or direct the output to specific uses, such as monitoring system internals, triggering alerts, or analyzing user behavior, by applying nozzles.
+
+The component logs follow a different path. They stream from rsyslog agents, and the cloud operator can configure them to stream out to a syslog drain.
+
+
+Loggregator
+***********
+	1)	Doppler
+			Gathers logs from Metron
+			Create app syslog drains Splunk Papertrail
+	2)	Traffic Controller
+			Handles client requests for logs
+			Exposes a web socket endpoint called the firehose
+
+
+Metron Agent
+**************
+
+	Forwards logs to the Loggregator subsystem.
+
+	The Metron Agent, part of the Cell, forwards application logs, errors, and metrics to the Cloud Foundry Loggregator. For more information, see the
+	Application Logging in Cloud Foundry topic.
+
+	Forwards application logs, errors, and application and Diego metrics to the Loggregator  Doppler component
+	Refer to the Metron repository  on GitHub for more information.
+
+	The		Metron	agent	running	on	each	component	or	application	VM	collects	and	sends	this	data	out	to	Doppler	components.	
+	Doppler	components	temporarily	buffer	the	data	before	periodically	forwarding	it	to	the	Traffic	Controller.	When	the	log	and	metrics	data	input	to	a
+	Doppler	exceeds	its	buffer	size	for	a	given	interval,	data	can	be	lost. 
+	The		Traffic	Controller	serves	the	aggregated	data	stream	through	the	Firehose	WebSocket	endpoint.
+
+
+Firehose
+*********
+
+		A websocket endpoint that exposes app logs, container metrics and ER component metrics.
+
+Nozzles
+************
+	Consume the firehouse output
+	E.g. Datadog Nozzle
+
+
+	
+
+PCF Metrics
+============
+
+
+
+	
+Logs from various components:
+
+	UAA	logs	security	events	to	a	file	located	at	/var/vcap/sys/log/uaa/uaa.log	on	the	UAA	virtual	machine	(VM).	Because	these	logs	are	automatically	rotated,	you must	configure	a	syslog	drain	to	forward	your	system	logs	to	a	log	management	service.
+
+
+		Log	Events
+UAA	logs	identify	the	following	categories	of	events:
+Authorization	and	Password	Events SCIM	Administration	Events
+
+	The	Cloud	Controller	logs	security	events	to	syslog.	You	must	configure	a	syslog	drain	to	forward	your	system	logs	to	a	log	management	service.
+
+				
+********************************************************************************   Diego   *****************************************************************************
+
+
+App Lifecycle Binaries
+*****************************
+The following three platform-specific binaries deploy applications and govern their lifecycle:
+The Builder, which stages a CF application. The Builder runs as a Task on every staging request. It performs static analysis on the application code and
+does any necessary pre-processing before the application is first run.
+The Launcher, which runs a CF application. The Launcher is set as the Action on the DesiredLRP for the application. It executes the start command with
+the correct system context, including working directory and environment variables.
+The Healthcheck, which performs a status check on running CF application from inside the container. The Healthcheck is set as the Monitor action on
+the DesiredLRP for the application.
+
+
+
+How Diego Stages Buildpack Applications:   694
+************************************************
+
+High Availability in Cloud Foundry	Pg 697
+************************************
+
+
+Diego Brain
+************
+
+Composed of two components
+Auctioneer
+Hold auctions for tasks and LRPs
+Converger
+Reconciles desired LRPs vs Actual LRPs through auctions
+
+Diego Brain components distribute Tasks and LRPs to Diego Cells, and correct discrepancies between ActualLRP and DesiredLRP counts to ensure faulttolerance and long-term consistency.
+The Diego Brain consists of the following:
+Auctioneer
+CC-Uploader
+File Server
+SSH Proxy
+TPS Watcher
+TCP Route-emitter
+Nsync
+Stager
+
+
+Cell:
+=========
+
+
+route-emitter
+=============
+
+
+Garden
+**********
+Provides a platform-independent server and clients to manage Garden containers
+Defines the Garden-runC  interface for container implementation
+See the Garden topic or the Garden repository  on GitHub for more information.
+
+
+Containers:
+****************
+			
+				Garden has two container types: unprivileged and privileged. Currently, CF runs all application instances and staging tasks in unprivileged containers by default. This measure increases security by eliminating the threat of root escalation inside the container.
+				
+				Although all application instances and staging tasks now run by default in unprivileged containers, operators can override these defaults by customizing their Diego deployment manifest and redeploying.
+
+				To enable privileged containers for buildpack-based apps, set the capi.nsync.diego_privileged_containers property to true in the Diego manifest.
+				To enable privileged containers for staging tasks, set the capi.stager.diego_privileged_containers property to true in the Diego manifest.
+				
+
+
+
+Garden
+*******
+
+Containers are managed by Garden
+Garden is an interface
+Garden-Linux is a backend implementation
+
+Garden RUNC
+****************
+
+Cloud Foundry currently uses the Garden-runC  backend, a Linux-specific implementation of the Garden interface using the Open Container Interface
+ (OCI) standard. Previous versions of Cloud Foundry used the Garden-Linux  backend.
+Garden-runC has the following features:
+Uses the same OCI low-level container execution code as Docker and Kubernetes, so container images run identically across all three platforms
+AppArmor  is configured and enforced by default for all unprivileged containers
+Seccomp whitelisting restricts the set of system calls a container can access, reducing the risk of container breakout
+Allows pluggable networking and rootfs management
+For more information, see the Garden-runC repository  on GitHub.
+
+
+
+Executor
+=============
+
+	Runs as a logical process inside the Rep
+	Implements the generic Executor actions detailed in the API documentation 
+	Streams STDOUT and STDERR to the Metron agent running on the Cell
+	Refer to the Executor repo  on GitHub for more information.
+
+Rep
+=======
+
+
+BBS
+*****
+
+3. The BBS submits the Tasks and LRPs to the Auctioneer, part of the Diego Brain.
+
+The BBS tracks desired LRPs, running LRP instances, and in-flight Tasks. It also periodically analyzes this information and corrects discrepancies to
+ensure consistency between ActualLRP and DesiredLRP counts.
+
+The Diego BBS stores data in MySQL. Diego uses the Go MySQL Driver to communicate with MySQL.
+
+Bulletin board system
+API to access the Diego database for tasks and LRPs
+Data is persisted to etcd
+
+
+Brain
+=======
+
+
+
+Auctioneer & Auction:
+=======================
+
+How the Diego Auction Allocates Jobs
+
+The Auctioneer distributes these Tasks and LRPs to Cells through an Auction. The Diego Brain communicates with Diego Cells using SSL/TLS
+protocol.
+
+The number of Long Running Process (LRP) instances that the auctioneer failed to place on Diego cells.
+
+
+--------------------------------------------------------
+
+
+Long Running Process (LRP)
+============================
+	
+	
+	
+Droplet
+==========
+	
+
+
+
+
+
+
+
+Coverage
+=============
+
+
+
+Blue Green Deployments
+=======================
+
+
+Services and User provided services
+======================================
+
+Service Brokers
+******************
+
+HA, Scaling & Autoscaler
+===========================
+
+Autoscaler:
+===============
+Scales your app up and down according to user-provided rules
+Monitors CPU, HTTP Latency and/or HTTP Throughput every 5 seconds
+Waits 30 seconds after every scale event before other scale decisions.
+Instance Limits Changes can be scheduled for one-time events in the future
+Instance Limits Changes can be scheduled to recur weekly to reduce app costs
+Configure via the CLI or API
+
+Environment variables
+======================
+
+VCAP_SERVIVCES, VCAP_APPLICATION
+
+
+After binding the services we need to restart the services, becuase containers are immutable and they need the configuration (environment variables) changes to take effect.
+
+
+->  Restaging vs restart
+
+	restage is prefered when droplets need to be rebuilt
+	When application droplets need not to be rebuilt then restart is preferred.
+
+-> Managed services vs user provided services
+
+
+
+Consul
+**********
+Provides dynamic service registration and load balancing through DNS resolution
+Refer to the Consul repo  on GitHub for more information.
+
+
+
+Security
+*************
+
+Understanding Cloud Foundry Security
+Page last updated:
+This topic provides an overview of Cloud Foundry (CF) security. For an overview of container security, see theUnderstanding Container Security topic.
+Cloud Foundry implements the following measures to mitigate against security threats:
+Minimizes network surface area
+Isolates customer applications and data in containers
+Encrypts connections
+Uses role-based access controls, applying and enforcing roles and permissions to ensure that users can only view and affect the spaces for which they
+have been granted access
+Ensures security of application bits in a multi-tenant environment
+Prevents possible denial of service attacks through resource starvation
+
+Security Groups
+********************
+
+Application Security group
+		A collection of egress rules that specify one or more individual protocols, ports, and destinations
+
+Application	Security	Groups	(ASGs)	are	a	collections	of	egress	rules	that	specify	the	protocols,	ports,	and	IP	address	ranges	where	app	or	task	instances send	traffic.
+ASGs	define		allow	rules,	and	their	order	of	evaluation	is	unimportant	when	multiple	ASGs	apply	to	the	same	space	or	deployment.	The	platform	sets	up rules	to	filter	and	log	outbound	network	traffic	from	app	and	task	instances.	ASGs	apply	to	both	buildpack-based	and	Docker-based	apps	and	tasks.
+
+
+	cf	create-security-group	SECURITY-GROUP	PATH-TO-RULES-FILE 		
+
+	$	cf	create-security-group	my-asg	~/workspace/my-asg.json
+	
+	[  {    "protocol": "icmp",    "destination": "0.0.0.0/0",    "type": 0,    "code": 1  },  {    "protocol": "tcp",    "destination": "10.0.11.0/24",    "ports": "80,443",    "log": true,    "description": "Allow http and https traffic from ZoneA"  } ]
+	
+	$	cf	bind-staging-security-group	my-asg
+
+	$	cf	bind-running-security-group	my-asg
+	
+	$	cf	bind-security-group	my-asg	my-org	my-space
+	
+	
+CF Security:
+******************
+
+		Cloud Foundry implements the following measures to mitigate against security threats:
+
+			Minimizes network surface area
+			Isolates customer applications and data in containers
+			Encrypts connections
+			Uses role-based access controls, applying and enforcing roles and permissions to ensure that users can only view and affect the spaces for which they have been granted access
+			Ensures security of application bits in a multi-tenant environment
+			Prevents possible denial of service attacks through resource starvation
+
+
+			As the image below shows, in a typical deployment of Cloud Foundry, the components run on virtual machines (VMs) that exist within a VLAN. In this configuration, the only access points visible on a public network are a load balancer that maps to one or more Cloud Foundry routers and, optionally, a NAT VM and a jumpbox. Because of the limited number of contact points with the public internet, the surface area for possible security vulnerabilities is minimized.
+			
+			Cloud Foundry recommends that you also install a NAT VM for outbound requests and a Jumpbox to access the BOSH Director, though these access points are optional depending on your network configuration.
+
+			All traffic from the public internet to the Cloud Controller and UAA happens over HTTPS. Inside the boundary of the system, components communicate over a publish-subscribe (pub-sub) message bus NATS, HTTP, and SSL/TLS.
+
+		BOSH:
+		
+			Operators deploy Cloud Foundry with BOSH. The BOSH Director is the core orchestrating component in BOSH: it controls VM creation and deployment, as well as other software and service lifecycle events. You use HTTPS to ensure secure communication to the BOSH Director.
+
+			BOSH includes the following functionality for security:
+
+			Communicates with the VMs it launches over NATS. Because NATS cannot be accessed from outside Cloud Foundry, this ensures that published messages can only originate from a component within your deployment.
+
+			Provides an audit trail through the bosh tasks --all and bosh tasks --recent=VALUE commands. bosh tasks --all returns a table that shows all BOSH actions taken by an operator or other running processes. bosh tasks --recent=VALUE returns a table of recent tasks, with VALUE being the number of recent tasks you want to view.
+
+			Allows you to set up individual login accounts for each operator. BOSH operators have root access.
+
+			Note: BOSH does not encrypt data stored on BOSH VMs. Your IaaS might encrypt this data.
+
+			
+		ISOLATION Segments:
+		
+
+
+		User Account and Authentication (UAA):	
+
+				UAA acts as an OAuth2 Authorization Server and uses JSON Web Token (Digitally signed by UAA)
+				
+				
+				UAA can be configured with an Identity store by operators.
+				Or it can also use external user store such as LDAP /. Microsoft Active Directory
+				Or UAA can also be configured to use SAML to connect to external store and enable SSO.
+				
+			UAA uses bcrypt to store encrypoted password in UAA db.
+			
+
+			Container isolation:			
+					Each instance of an app deployed to CF runs within its own self-contained environment, a Garden container. This container isolates processes, memory, and the filesystem using operating system features and the characteristics of the virtual and physical infrastructure where CF is deployed.
+			
+			Container File System:  Garden Rootfs (GrootFS) tool.
+			
+			A read-only base filesystem: This filesystem has the minimal set of operating system packages and Garden-specific modifications common to all containers. Containers can share the same read-only base filesystem because all writes are applied to the read-write layer.
+
+			A container-specific read-write layer: This layer is unique to each container and its size is limited by XFS project quotas. The quotas prevent the read-write layer from overflowing into unallocated space.
+			
+				
+				
+Network security:
+**********************
+
+
+			Network traffic rules:		Configured by Administrators at 2 levels.
+			
+				1. Application Security Group:	At container Level
+				2. Container to Container Networking Policies
+			
+Role basesd access control (RBAC):
+************************************
+
+
+
+Security for Service Broker Integration:
+**********************************************
+				
+
+
+
+
+Routing Services:
+*********************
+
+The		router	routes	incoming	traffic	to	the	appropriate	component,	either	a	Cloud	Controller	component	or	a	hosted	application	running	on	a	Diego	Cell.
+The	router	periodically	queries	the	Diego	Bulletin	Board	System	(BBS)	to	determine	which	cells	and	containers	each	application	currently	runs	on.	Using this	information,	the	router	recomputes	new	routing	tables	based	on	the	IP	addresses	of	each	cell	virtual	machine	(VM)	and	the	host-side	port	numbers	for the	cell’s	containers.
+
+HTTP Routing
+**************
+Page last updated:
+This topic describes features of HTTP routing handled by the Gorouter, which is part of the Cloud Foundry (CF)routing  tier.
+Session Affinity
+The Gorouter supports session affinity, orsticky sessions, for incoming HTTP requests to compatible apps.
+With sticky sessions, when multiple instances of an app are running on CF, requests from a particular client always reach the same app instance. This
+allows apps to store session data specific to a user session.
+To support sticky sessions, configure your app to return a JSESSIONID cookie in responses. The app generates a JSESSIONID as a long hash in the
+following format:
+1A530637289A03B07199A44E8D531427
+If an app returns a JSESSIONID cookie to a client request, the CF routing tier generates a unique VCAP_ID for the app instance based on its GUID in
+the following format:
+323f211e-fea3-4161-9bd1-615392327913
+On subsequent requests, the client must provide both the JSESSIONID and VCAP_ID cookies.
+
+The CF routing tier uses the VCAP_ID cookie to forward client requests to the same app instance every time. The JSESSIONID cookie is forwarded to the
+app instance to enable session continuity. If the app instance identified by the VCAP_ID crashes, the Gorouter attempts to route the request to a
+different instance of the app. If the Gorouter finds a healthy instance of the app, it initiates a new sticky session.
+HTTP Headers
+HTTP traffic passed from the Gorouter to an app includes the following HTTP headers:
+X-Forwarded-Proto gives the scheme of the HTTP request from the client. The scheme is HTTP if the client made an insecure request or HTTPS if the
+client made a secure request. Developers can configure their apps to reject insecure requests by inspecting the HTTP headers of incoming traffic and
+rejecting traffic that includes X-Forwarded-Proto with the scheme of HTTP.
+X-Forwarded-For gives the IP address of the client originating the request.
+If your load balancer terminates TLS upstream from the Gorouter, it must append these headers to requests forwarded to the Gorouter. For more
+information, see the Securing Traffic into Cloud Foundry topic.
+
+Zipkin Tracing in HTTP Headers
+Zipkin is a tracing system that enables app developers to troubleshoot failures or latency issues. Zipkin provides the ability to trace requests and
+responses across distributed systems. See Zipkin.io  for more information.
+When the Zipkin feature is enabled in Cloud Foundry , the Gorouter examines the HTTP request headers and performs the following:
+If the X-B3-TraceId and X-B3-SpanId HTTP headers are not present in the request, the Gorouter generates values for these and inserts the headers
+into the request forwarded to an application. These values are also found in the Gorouter access log message for the request: x_b3_traceid and
+x_b3_spanid .
+If both X-B3-TraceId and X-B3-SpanId HTTP headers are present in the request, the Gorouter forwards the same value for X-B3-TraceId ,
+generates a new value for X-B3-SpanId , and adds the X-B3-ParentSpan header, and sets to the value of the span id in the request. In addition to
+these trace and span ids, the Gorouter access log message for the request includes x_b3_parentspanid .
+
+Developers can then add Zipkin trace IDs to their application logging in order to trace app requests and responses in Cloud Foundry.
+After adding Zipkin HTTP headers to app logs, developers can use cf logs
+myapp
+to correlate the trace and span ids logged by the Gorouter with the trace
+ids logged by their app. To correlate trace IDs for a request through multiple apps, each app must forward appropriate values for the headers with
+requests to other applications.
+App Instance Routing in HTTP Headers
+Developers who want to obtain debug data for a specific instance of an app can use the HTTP header X-CF-APP-INSTANCE to make a request to an app
+instance.
+Perform the following steps to make an HTTP request to a specific app instance:
+1. Obtain the GUID of your app:
+$ cf app YOUR-APP --guid
+2. List your app instances and retrieve the index number of the instance you want to debug:
+$ cf app YOUR-APP
+3. Make a request to the app route using the HTTP header X-CF-APP-INSTANCE set to the concatenated values of the app GUID and the instance index:
+$ curl app.example.com -H "X-CF-APP-INSTANCE":"YOUR-APP-GUID:YOUR-INSTANCE-INDEX"
+Forward Client Certificate to Applications
