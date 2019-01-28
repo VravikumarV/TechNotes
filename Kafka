@@ -1,0 +1,62 @@
+Kafka
+********************
+
+Partitions
+Offset
+Cluster
+Broker
+leader Node
+
+
+
+Kafka vs Kafka Streams
+
+Kafka Streams & Tasks
+
+Each task will be assigned a list of partitions from the input streams (i.e., Topics)
+
+
+Topic - Partitions - Stream - Message - Task - Broker - cluster - Leader
+
+Thread Model
+
+multiple Intsances
+
+Kafka Streams API
+**********************
+
+
+
+
+
+
+
+Kafka Connect API
+**********************
+
+
+
+https://kafka.apache.org/11/documentation/streams/architecture	[V.Good]
+
+
+https://sematext.com/blog/kafka-connect-elasticsearch-how-to/	[V.Good]
+
+
+Connector framework provides an easy to use REST API for retrieval of information about connectors, updating configuration, and managing connectors themselves. 
+
+ Kafka Connect Elasticsearch	[ uses jest ]
+ 
+		 Kafka Connect Elasticsearch which allows sending data from Kafka to Elasticsearch It uses Jest, which is a HTTP based Elasticsearch client library
+ 
+ 
+ 
+Resources:
+===============
+
+
+https://stackoverflow.com/questions/38024514/understanding-kafka-topics-and-partitions		[V.Good]
+
+
+Interview Questions:
+=======================
+
