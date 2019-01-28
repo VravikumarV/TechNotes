@@ -1,11 +1,18 @@
-Kafka
-********************
 
+Why Kafka ?
+
+Kafka features ?
+
+
+
+Kafka Components
+********************
+Broker
 Partitions
 Offset
 Cluster
-Broker
 leader Node
+Replicas
 
 
 
@@ -36,10 +43,6 @@ Kafka Connect API
 
 
 
-https://kafka.apache.org/11/documentation/streams/architecture	[V.Good]
-
-
-https://sematext.com/blog/kafka-connect-elasticsearch-how-to/	[V.Good]
 
 
 Connector framework provides an easy to use REST API for retrieval of information about connectors, updating configuration, and managing connectors themselves. 
@@ -53,10 +56,16 @@ Connector framework provides an easy to use REST API for retrieval of informatio
 Resources:
 ===============
 
+https://kafka.apache.org/11/documentation/streams/architecture	[V.Good]
+
+
+https://sematext.com/blog/kafka-connect-elasticsearch-how-to/	[V.Good]
+
 
 https://stackoverflow.com/questions/38024514/understanding-kafka-topics-and-partitions		[V.Good]
 
 
 Interview Questions:
 =======================
+
 
