@@ -56,6 +56,8 @@ Connector framework provides an easy to use REST API for retrieval of informatio
 Resources:
 ===============
 
+http://kafka.apache.org/documentation.html#theconsumer
+
 https://kafka.apache.org/11/documentation/streams/architecture	[V.Good]
 
 
@@ -63,6 +65,8 @@ https://sematext.com/blog/kafka-connect-elasticsearch-how-to/	[V.Good]
 
 
 https://stackoverflow.com/questions/38024514/understanding-kafka-topics-and-partitions		[V.Good]
+
+http://codeflex.co/what-is-apache-kafka/
 
 
 Interview Questions:
