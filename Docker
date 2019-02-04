@@ -1,0 +1,70 @@
+Docker:
+
+Docker Engine
+
+Docker Tool kit:
+
+Docker installation on windows:
+
+
+Docker Swarm:
+
+
+Commands
+*********************************
+
+
+docker images -a
+
+docker rmi $(docker images -a -q) [Find all images and delete them]
+docker rmi -f image
+
+docker ps -a		[ To list all c ontainers]
+
+
+docker run —rm	( To automatically delete after exit )
+
+
+
+docker images -a | grep "pattern" | awk '{print $3}' | xargs docker rmi
+
+
+docker push vravikumarv/dbdocker:1
+
+
+docker pull vravikumarv/dbdocker:1
+
+docker run -p 8181:8181 vravikumarv/dbdocker:1
+
+
+$ docker stack deploy --compose-file docker-compose.yml vossibility
+
+Docker create:	[https://docs.docker.com/engine/reference/commandline/create/#initialize-volumes]
+The docker create command creates a writeable container layer over the specified image and prepares it for running the specified command. The container ID is then printed to STDOUT. This is similar to docker run -d except the container is never started. You can then use the docker start <container_id> command to start the container at any point.
+
+This is useful when you want to set up a container configuration ahead of time so that it is ready to start when you need it. The initial status of the new container is created.
+
+Please see the run command section and the Docker run reference for more details.
+
+Examples
+
+Create and start a container
+
+$ docker create -t -i fedora bash
+
+$ docker run reds : will run the reds server in attached mode, console will be hijacked by reds runtime for logging.
+
+$ docker run —name rediserver redis :   To name the running redis server, this way running containers should be unique by name per host.
+
+$ docker run -d redis : To run in detached mode, a background process
+
+$ docker run -d -p 6379:6379 —name rediserver redis   : To publish host port to docker container on a port, (host_ip:host-port:docker-port)
+
+$ docker run -d -p 6379:6379 —name rediserver -v /tmp/data:/data  : To publish host port to docker container on a port, (host_ip:host-port:docker-port)
+ 
+
+$ docker ps : will give the information about running container
+
+ 
+
+
