@@ -1,0 +1,39 @@
+
+Apache Storm vs Kafka vs Rabbit MQ vs Flink vs Spark
+=======================================================
+
+
+Resources:
+*************
+
+https://www.linkedin.com/pulse/spark-streaming-vs-flink-storm-kafka-streams-samza-choose-prakash
+https://www.educba.com/apache-storm-vs-kafka/
+
+
+Apache Storm:
+**************
+        
+        Storm is a fault tolerant, distributed framework for real-time computation and processing data streams. It takes the data from various
+        data sources such as HBase, Kafka, Cassandra and many other applications and processes the data in real time. It has been written in Clojure 
+        and Java.
+        
+        Storm topology is the combination of Spout and Bolt. It is same as Map and Reduce in Hadoop.
+
+        Stream: Stream can be considered as Data Pipeline it is the actual data that we received from a data source.
+
+        Spout: Spout receive data from different-different data sources such as APIs. It continuously receives data from data sources and sends it to Bolt for processing.
+
+        Bolt: It is logical processing units takes data from Spout and perform logical operations such as aggregation, filtering, joining & interacting with data sources and databases.
+        
+
+
+
+        
+        
+Apache Kafka:
+***************
+
+      Kafka use to handle big amount of data in the fraction of seconds. It is a distributed message broker which relies on topics and partitions.
+      
+      It provides real-time data streaming. It takes the data from different websites such as Facebook, Twitter and APIs and passes the data to any different processing application (Apache Storm) in Hadoop environment.
+
