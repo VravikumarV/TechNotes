@@ -104,9 +104,20 @@ Angular instead inspects directive and component classes and calls the hook meth
 
 Nonetheless, it's good practice to add interfaces to TypeScript directive classes in order to benefit from strong typing and editor tooling.
 
+Angular6 Testing
+******************
+
+Angular 6 Cache
+****************
+
+Angular 6 Mocking
+******************
 
 Observable
 ============
 
 Pipes:
 ======
+
+@Input & @Output
+==================
