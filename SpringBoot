@@ -1,0 +1,44 @@
+
+
+
+Spring Boot:
+***************
+
+
+Opinionated
+Actuator
+AOP
+
+
+Annotation Reference:
+**********************
+
+@ControllerAdvice
+
+
+Classes & API's
+***************
+
+ResponseBodyAdvice
+
+
+Custom Annotations for AOP:
+*****************************
+-- Method Level
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD) //can use in method only.
+public @interface Test {
+...
+...
+}
+
+Note: Method declarations must not have any parameters or a throws clause. Return types are restricted to primitives, String, Class, enums, annotations, and arrays of the preceding types.
+
+-- Class Level
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE) //on class level
+public @interface TesterInfo {
+...
+...
+}
+
