@@ -1,11 +1,121 @@
 
-RabbitMQ
+
+Why Rabbit MQ ?
+
+
+Features:
+
+
+
+When to use ?
+
+
+
+http://localhost:15672:			guest / guest
+
+https://www.rabbitmq.com/getstarted.html
+
+rabbitmq-plugins.bat enable rabbitmq_management
+
+
+RabbitMQ:
+************
+
+
+
+Exchange:
+============
+
+Fanout exchange:   The fanout exchanges, simply ignored its (binding key / routing key) value. It routes the messages to all the quues which are bound to that exchange.
+
+Direct exchange:	The routing algorithm behind a direct exchange is simple - a message goes to the queues whose binding key exactly matches the routing key of the message.
+
+Topic exchange:		Topic exchanges are used to route messages to queues based on wildcard matches between the routing key and the routing pattern which in turn is specified by the queue binding. Based on a matching between a message routing key and this pattern, messages are routed to one or many queues.
+
+Headers Exchange:	Headers exchanges route based on arguments containing headers and optional values. Headers exchanges are very similar to topic exchanges, but it routes based on header values instead of routing keys. A message is considered matching if the value of the header equals the value specified upon binding.
+
+
+
+
+
+Request-reply
+Direct reply-to
+
+
+
+Work Queue:		Work Queue that will be used to distribute time-consuming tasks among multiple workers.
+
+Mirror Queue
+
+Dead Letter Queue & Exchange:	RabbitMQ provides an AMQP extension known as the "Dead Letter Exchange" - the dead letter exchange provides functionality to capture messages that are not deliverable.
+
+
+Routing:
+
+
+
+
+
+Resources:
+*************
+
+https://www.rabbitmq.com/tutorials/tutorial-one-java.html
+
+https://www.rabbitmq.com/management.html
+
+https://www.rabbitmq.com/getstarted.html
+
+https://www.3pillarglobal.com/insights/rabbitmq-understanding-message-broker
+
+
+FAQ:
+************
+
+
+MessageOrdering
+Purging
+Dealetter Queue
+
+
+API
 ***********
 
-Why Rabvbit MQ ?
+Open Declaration org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter
 
+
+
+
+Configurations:
+*******************
+
+
+disk_free_limit
 
 ActiveMQ vs RabbitMQ vs 
-******************************
+************************
+
+
+
+
+
+With Spring
+**************
+
+
+org.springframework.amqp.core.MessagePostProcessor
+
+
+1.  convertAndSend(String routingKey, Object message, MessagePostProcessor messagePostProcessor) throws AmqpException
+    Convert a Java object to an Amqp Message and send it to a default exchange with a specific routing key.
+    
+2.
+
+
+org.springframework.amqp.core.Message:  The 0-8 and 0-9-1 AMQP specifications do not define an Message class or interface.
+Instead, when performing an operation such as basicPublish the content is passed as a byte-array argument and 
+additional properties are passed in as separate arguments. Spring AMQP defines a Message class as part of a more general AMQP domain
+model representation. The purpose of the Message class is to simply encapsulate the body and properties within a 
+single instance so that the rest of the AMQP API can in turn be simpler.
+
 
 
