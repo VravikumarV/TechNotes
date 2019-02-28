@@ -122,3 +122,55 @@ single instance so that the rest of the AMQP API can in turn be simpler.
 Example:
 ***********
 
+package com.techgaint.messaging.producer;
+
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageProperties;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class RabbitProducer {
+	
+	@Autowired
+	private RabbitTemplate rabbitTemplate;
+	
+	public void postMessage(String msg) {
+		rabbitTemplate.convertAndSend("Default is: "+msg);
+		System.out.println(msg);
+	}
+
+	public void postOnDirect(String exchange,String routingkey, String rabbitMsg) {
+		MessageProperties mprop = new MessageProperties();
+		Message message = new Message(rabbitMsg.getBytes(), mprop);
+		rabbitTemplate.send(exchange, routingkey, message);
+		//rabbitTemplate.convertAndSend(exchange, routingkey, rabbitMsg);
+	}
+
+	public void postOnFanOut(String exchange,String rabbitMsg) {
+		MessageProperties mprop = new MessageProperties();
+		Message message = new Message(rabbitMsg.getBytes(), mprop);
+		rabbitTemplate.send(exchange, null, message);
+	}
+
+	public void postOnHeader(String exchange,String header,String rabbitMsg) {
+		MessageProperties mprop = new MessageProperties();
+		mprop.setHeader("head-1", header);
+		Message message = new Message(rabbitMsg.getBytes(), mprop);
+		rabbitTemplate.send(exchange, null, message);
+	}
+
+	public void postOnTopic(String exchange,String routingKey,String rabbitMsg) {
+		MessageProperties mprop = new MessageProperties();
+		Message message = new Message(rabbitMsg.getBytes(), mprop);
+		rabbitTemplate.send(exchange, routingKey, message);
+	}
+
+	/*public void postObjectOnDirectExchange(String exchange,String routingkey, UserModel user) {
+		MessageProperties mprop = new MessageProperties();
+		Message message = new Message(rabbitMsg.getBytes(), mprop);
+		rabbitTemplate.send(exchange, routingkey, message);
+		//rabbitTemplate.convertAndSend(exchange, routingkey, rabbitMsg);
+	}*/
+}
