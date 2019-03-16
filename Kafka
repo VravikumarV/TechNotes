@@ -15,7 +15,58 @@ Kafka features, FAQs:
 	When a producer firsts connect to the cluster (via a broker in broker.list parameter), it issues a Metadata request, with the topics you are publishing to, and the broker replies with which broker has which partition. If a broker goes down, the producer detects the failed connection (via tcp timeout usually), and re-issues a metadata request to find the new leader.
 7) Kafka does not currently support reducing the number of partitions for a topic.
 
-8) https://stackoverflow.com/questions/36114221/is-it-safe-to-add-partition-or-broker-online-for-kafka?rq=1
+Examples:
+************
+
+Streams:
+===========
+
+https://www.programcreek.com/java-api-examples/index.php?api=org.apache.kafka.streams.kstream.KStreamBuilder
+
+https://docs.confluent.io/current/streams/developer-guide/dsl-api.html
+
+https://github.com/spring-cloud/spring-cloud-stream-binder-kafka/issues/265
+
+https://technology.amis.nl/2017/02/11/getting-started-with-kafka-streams-building-a-streaming-analytics-java-application-against-a-kafka-topic/
+
+https://github.com/amient/hello-kafka-streams/blob/master/src/main/java/io/amient/examples/wikipedia/JsonPOJOSerde.java
+
+Connect
+===========
+
+https://github.com/amient/hello-kafka-streams/blob/master/src/main/java/io/amient/kafka/connect/embedded/ConnectEmbedded.java
+
+Schema Registry & Avro
+========================
+
+Applications & Use Case:
+=========================
+
+https://dzone.com/articles/applying-kafka-streams-to-the-purchase-transaction?fromrel=true
+
+https://stackoverflow.com/questions/48247478/real-world-use-cases-where-apache-kafka-is-used
+
+
+
+Must Read Links:
+******************
+
+https://kafka.apache.org/21/documentation/streams/developer-guide/running-app
+
+https://kafka.apache.org/21/documentation/streams/tutorial
+
+Kafka:
+
+https://stackoverflow.com/questions/36114221/is-it-safe-to-add-partition-or-broker-online-for-kafka?rq=1
+https://stackoverflow.com/questions/44014975/kafka-consumer-api-vs-streams-api?rq=1
+
+Streams:
+	https://kafka.apache.org/documentation/streams/
+	https://www.confluent.io/blog/introducing-kafka-streams-stream-processing-made-simple/
+	
+
+Topics:
+*********
 
 Rebalance:
 
