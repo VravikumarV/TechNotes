@@ -1,8 +1,34 @@
 
 Why Kafka ?
 
-Kafka features ?
+Kafka features, FAQs:
 
+1) __consumer_offsets:  is used to store information about committed offsets for each topic:partition per group of consumers (groupID). It is compacted topic, so data will be periodically compressed and only latest offsets information available.
+2) _schema - is not a default kafka topic (at least at kafka 8,9). It is added by Confluet.
+3) How does the Kafka distribute a topic and its partitions among the brokers?
+	When you create a new topic, Kafka places the partitions and replicas in a way that the brokers with least number of existing partitions are used first, and replicas for same partition are on different brokers.
+4) Does the Kafka redistribute the topic when a new Kafka Broker joins a cluster?
+	When you add a new broker, it is used for new partitions (since it has lowest number of existing partitions), but there is no automatic balancing of existing partitions to the new broker. You can use the replica-reassignment tool to move partitions and replicas to the new broker.
+5) Can the topic partition be increased after the topic was created?
+	Yes, you can add partitions to an existing topic
+6) Do the producers need to know which broker the partition exists and push message to them? What happens when that broker goes down while the producers are pushing messages? Basically, how the producers see the partitions in a huge Kafka cluster?
+	When a producer firsts connect to the cluster (via a broker in broker.list parameter), it issues a Metadata request, with the topics you are publishing to, and the broker replies with which broker has which partition. If a broker goes down, the producer detects the failed connection (via tcp timeout usually), and re-issues a metadata request to find the new leader.
+7) Kafka does not currently support reducing the number of partitions for a topic.
+
+8) https://stackoverflow.com/questions/36114221/is-it-safe-to-add-partition-or-broker-online-for-kafka?rq=1
+
+Rebalance:
+
+
+Distributed Mode:
+
+
+/tmp/kafka-logs:
+
+Configurations:
+********************
+
+num.standby.replicas:    replicated local state stores related	[https://kafka.apache.org/21/documentation/streams/developer-guide/running-app]
 
 
 Kafka Components
@@ -19,6 +45,8 @@ Replicas
 Kafka vs Kafka Streams
 
 Kafka Streams & Tasks
+
+Kafka Connect.
 
 Each task will be assigned a list of partitions from the input streams (i.e., Topics)
 
