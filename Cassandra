@@ -1,4 +1,7 @@
 
+https://docs.datastax.com/en/cassandra/3.0/cassandra/architecture/archIntro.html
+
+https://docs.datastax.com/en/cassandra/3.0/cassandra/cassandraAbout.html
 
 https://docs.datastax.com/en/cassandra/3.0/index.html
 
@@ -11,6 +14,8 @@ https://en.wikipedia.org/wiki/Apache_Cassandra
 https://www.baeldung.com/cassandra-data-modeling
 
 https://www.datastax.com/dev/blog/basic-rules-of-cassandra-data-modeling
+
+https://aws.amazon.com/nosql/columnar/
 
 Cassandra
 ***********
