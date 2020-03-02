@@ -1,0 +1,15 @@
+
+JDK 9
+**************
+
+JPMS: The most important new feature of JDK 9 was the Java Platform Module System (JPMS) that divided the monolithic rt.jar and tools.jar files into a number of distinct modules 
+
+JDK & JRE:  JDK 9 also eliminated the distinction between the Java Development Kit (JDK) and the Java Runtime Environment (JRE). In the past, there was a sub-directory in the JDK (unsurprisingly called jre) which only contained things that were required to run a Java application. On Linux, the full JDK 8 was 364 Mb, the JRE just 197 Mb. 
+
+In JDK 9 and later, the idea is to build Java runtimes that are tailored to the requirements of a specific application. Rather than including all 75 modules, you need only include the java.base module (which all runtimes must include by definition) as well as any other modules the application references. All transitive module dependencies must also be included. JDK 9 and later provides the jlink command to assemble and optimize a set of modules and their dependencies into a custom runtime image.
+
+JDK 9 and later provides the jlink command to assemble and optimize a set of modules and their dependencies into a custom runtime image.
+
+JDK 11 Features
+*****************
+
