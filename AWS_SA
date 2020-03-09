@@ -1,0 +1,118 @@
+AWS SA Path:
+****************
+
+AWS Services:
+**************
+
+Amazon EC2:              Virtual servers in the cloud
+Amazon EKS:              Amazon EKS is a managed service that makes it easy for you to use Kubernetes on AWS without needing to install and operate your own Kubernetes control plane.
+Amazon ECR:              Elastic Container Registry (ECR) is a fully-managed container registry that makes it easy for developers to store, manage, and deploy container images.
+Amazon S3:               Scalable storage in the cloud.
+Amazon Aurora:           High performance managed relational database
+Amazon DynamoDB:         Managed NoSQL database
+Amazon RDS:              Managed relational database service for MySQL, PostgreSQL, Oracle, SQL Server, and MariaDB
+AWS Lambda:              Run code without thinking about servers
+Amazon VPC:              Isolated cloud resources
+Amazon Lightsail:        Launch and manage virtual private servers
+Amazon SageMaker:        Build, train, and deploy machine learning models at scale.
+Amazon Elastic Beanstalk: 
+
+
+
+
+
+Amazon VPC:
+*******************************
+
+Virtual Private Cloud:
+=======================
+	Your VPCs
+	Subnets
+	Route Tables
+	Internet Gateways
+	Egress Only Internet Gateways
+	DHCP Options Sets
+	Elastic IPs
+	Endpoints
+	Endpoint Services
+	NAT Gateways
+	Peering Connections
+  
+Security
+==========
+	Network ACLs
+	Security Groups
+  
+Virtual Private Network (VPN)
+==============================
+	Customer Gateways
+	Virtual Private Gateways
+	Site-to-Site VPN Connections
+	Client VPN Endpoints
+  
+Transit Gateways
+=================
+	Transit Gateways
+	Transit Gateway Attachments
+	Transit Gateway Route Tables
+	Network Manager
+  
+Traffic Mirroring
+==================
+	Mirror Sessions
+	Mirror Targets
+	Mirror Filters
+
+Network services:
+********************
+CloudFront
+Route 53
+API Gateway
+Direct Connect
+AWS App Mesh
+AWS Cloud Map
+Global Accelerator
+
+Security, Identity & Compliance:
+********************************
+
+IAM
+Resource Access Manager
+Cognito
+Secrets Manager
+GuardDuty
+Inspector
+Amazon Macie
+AWS Single Sign-On
+Certificate Manager
+Key Management Service
+CloudHSM
+Directory Service
+WAF & Shield
+AWS Firewall Manager
+Artifact
+Security Hub
+Detective
+
+
+Management & Governance:
+****************************
+
+AWS Organizations
+CloudWatch
+AWS Auto Scaling
+CloudFormation
+CloudTrail
+Config
+OpsWorks
+Service Catalog
+Systems Manager
+AWS AppConfig
+Trusted Advisor
+Control Tower
+AWS License Manager
+AWS Well-Architected Tool
+Personal Health Dashboard
+AWS Chatbot
+Launch Wizard
+AWS Compute Optimizer
