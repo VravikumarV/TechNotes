@@ -1,0 +1,57 @@
+SQL Functions
+****************
+
+
+https://docs.oracle.com/cd/B19306_01/server.102/b14200/functions001.htm#i81407    [V.Imp]
+
+
+
+1. Single Row Functions:   Single-row functions return a single result row for every row of a queried table or view. These functions can appear in select lists, WHERE clauses, START WITH and CONNECT BY clauses, and HAVING clauses.
+  Ex: Numeric, CHaracter, 
+  NLS Character,
+  DateTime
+  Conversion Functions
+  Collection Functions
+  Data Mining functions
+  XML Functions
+  Encodung & Dcoding
+  Null related
+  Environment and Identifier:
+  
+ 2. Aggregate functions:   Aggregate functions return a single result row based on groups of rows, rather than on single rows. Aggregate functions can appear in select lists and in ORDER BY and HAVING clauses. They are commonly used with the GROUP BY clause in a SELECT statement, where Oracle Database divides the rows of a queried table or view into groups. In a query containing a GROUP BY clause, the elements of the select list can be aggregate functions, GROUP BY expressions, constants, or expressions involving one of these. Oracle applies the aggregate functions to each group of rows and returns a single result row for each group.
+    If you omit the GROUP BY clause, then Oracle applies aggregate functions in the select list to all the rows in the queried table or view. You use aggregate functions in the HAVING clause to eliminate groups from the output based on the results of the aggregate functions, rather than on the values of the individual rows of the queried table or view.
+
+3.  Analytic functions:    Analytic functions compute an aggregate value based on a group of rows. They differ from aggregate functions in that they return multiple rows for each group. The group of rows is called a window and is defined by the analytic_clause. For each row, a sliding window of rows is defined. The window determines the range of rows used to perform the calculations for the current row. Window sizes can be based on either a physical number of rows or a logical interval such as time.
+    Analytic functions are the last set of operations performed in a query except for the final ORDER BY clause. All joins and all WHERE, GROUP BY, and HAVING clauses are completed before the analytic functions are processed. Therefore, analytic functions can appear only in the select list or ORDER BY clause.
+    Analytic functions are commonly used to compute cumulative, moving, centered, and reporting aggregates.
+
+4.  Object reference functions manipulate REF values, which are references to objects of specified object types. The object reference functions are:
+
+5.  Model functions can be used only in the model_clause of the SELECT statement. The model functions are:
+
+
+
+Some example on functions:
+
+  1.  with
+  2.  over (partition by ... group by ...)
+  3.  
+  
+
+
+  
+
+
+with clause
+Group by and Order By
+OVER :    OVER (PARTITION BY department_id ORDER BY employee_id)
+
+
+window functions:
+**********************
+
+
+Analytic functions:
+***********************
+
+ROW_NUMBER()
