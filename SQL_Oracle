@@ -35,7 +35,8 @@ Some example on functions:
 
   1.  with
   2.  over (partition by ... group by ...)
-  3.  
+  3.  https://www.codeproject.com/Questions/1184524/Find-the-highest-paid-employee-from-different-depa
+  4.  https://www.experts-exchange.com/articles/32791/Partition-By-Clause-in-Oracle.html
   
 
 
@@ -50,6 +51,7 @@ OVER :    OVER (PARTITION BY department_id ORDER BY employee_id)
 window functions:
 **********************
 
+https://docs.oracle.com/cd/E17952_01/mysql-8.0-en/window-functions-usage.html
 
 Analytic functions:
 ***********************
