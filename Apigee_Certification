@@ -1,0 +1,65 @@
+Apigee Certification Roadmap:
+********************************
+
+Policies:
+*********
+
+https://docs.apigee.com/api-platform/reference/policies/reference-overview-policy
+
+
+Traffic management policies:
+
+      ConcurrentRateLimit policy
+      Quota policy
+      ResetQuota policy
+      SpikeArrest policy
+
+Caching Policies:
+
+      InvalidateCache policy
+      LookupCache policy
+      PopulateCache policy
+      ResponseCache policy
+
+Security Polcies:
+
+
+      AccessControl policy
+      BasicAuthentication policy
+      JSONThreatProtection policy
+      LDAP policy*†
+      
+      JWS policies:
+              DecodeJWS policy
+              GenerateJWS policy
+              VerifyJWS policy
+    JWT policies:
+              DecodeJWT policy
+              GenerateJWT policy
+              VerifyJWT policy
+     
+      OAuth v2 policies:
+              DeleteOAuthv2Info policy
+              GetOAuthv2Info policy
+              OAuthv2 policy
+              SetOAuth v2 Info policy
+       OAuth v1 policies:
+              DeleteOAuthv1Info policy
+              GetOAuthv1Info policy
+              OAuthv1.0a policy
+         
+        RegularExpressionProtection policy
+        SAMLAssertion policy
+        VerifyAPIKey policy
+        XMLThreatProtection policy
+
+Extension Policies:
+
+        ExtensionCallout policy
+        FlowCallout policy
+        JavaCallout policy
+        JavaScript policy
+        MessageLogging policy
+        PythonScript policy
+        ServiceCallout policy
+        StatisticsCollector policy
