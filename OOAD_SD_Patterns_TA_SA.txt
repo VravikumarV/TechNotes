@@ -1,0 +1,85 @@
+
+
+OOAD, System Design, Principles, Patterns, 
+
+
+Component
+System
+Service
+Distributed System
+Application
+Library
+Framework
+
+
+Protocols:	
+	
+		HTTPS/Rest, JMS, AMQP, WS-SOAP, 
+
+
+		
+		
+
+System Design:
+*******************
+
+
+		
+		
+*************************************************************
+
+Micro Services Architecture:
+*****************************
+
+https://martinfowler.com/microservices/
+
+https://dzone.com/refcardz/designing-microservices-with-cassandra?chapter=1
+
+
+Event Sourcing:
+***************
+
+
+CQRS:
+***************
+
+
+Event Driven Architecture:
+****************************
+
+
+https://airbrake.io/blog/software-design/domain-driven-design
+
+
+Domain Driven Design:			DDD Heavily based on OOAD.
+*********************
+
+		[ Best suited for Product development or to start with designing around strong domain business model with Domain/Business experts requirements ]
+
+	Domain models
+	Value Objects
+	Domain Events [ An action or event pertaining to change in the domain which is expected / accepted by domain experts - A change in the state of Domain ]
+	Aggregates
+	Service (Repo)
+	Factories
+	
+	The state of domain or any operation is strictly restricted by aggregates which wrapped around group domain models and are only allowed through services and Factories to the out side world. Still the kind of operations being perform by outer world with mentioned Factories still needs to be agreed by defined and agreed by Domain experts by registering the events and logging the same for auditing to keep track of the change around the state of domain.
+	
+	
+	
+	Value Objects are immutable
+	
+	
+Hexagonal Architecture:
+************************
+
+https://alistair.cockburn.us/hexagonal-architecture/
+
+https://blog.octo.com/en/hexagonal-architecture-three-principles-and-an-implementation-example/
+
+https://medium.com/swlh/implementing-a-hexagonal-architecture-bcfbe0d63622
+
+https://dzone.com/articles/hexagonal-architecture-what-is-it-and-how-does-it
+
+
+
