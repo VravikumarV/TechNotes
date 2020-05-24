@@ -1,3 +1,22 @@
+Blogs:
+
+https://www.datastax.com/blog/2019/05/how-apache-cassandratm-balances-consistency-availability-and-performance
+
+https://stackoverflow.com/questions/2634955/when-not-to-use-cassandra
+
+https://blog.pythian.com/cassandra-use-cases/
+
+https://www.edureka.co/blog/cassandra-use-cases/
+
+https://academy.datastax.com/use-cases/fraud-detection
+
+https://blog.softwaremill.com/7-mistakes-when-using-apache-cassandra-51d2cf6df519
+
+https://towardsdatascience.com/when-to-use-cassandra-and-when-to-steer-clear-72b7f2cede76
+
+https://dzone.com/articles/the-top-10-reasons-to-use-cassandra-database
+
+Resources:
 
 https://docs.datastax.com/en/cassandra/3.0/cassandra/architecture/archIntro.html
 
@@ -17,8 +36,12 @@ https://www.datastax.com/dev/blog/basic-rules-of-cassandra-data-modeling
 
 https://aws.amazon.com/nosql/columnar/
 
+https://dzone.com/refcardz/designing-microservices-with-cassandra?chapter=1	[ Example ]
+
 Cassandra
 ***********
+
+Cassandra is usally can be said as AP ( Availabaility & Partition tolerance) with Eventually Consistent.
 
 Apache Cassandra is a free and open-source, distributed, wide column store, NoSQL database management system designed to handle large amounts of data across many commodity servers, providing high availability with no single point of failure. Cassandra offers robust support for clusters spanning multiple datacenters,[1] with asynchronous masterless replication allowing low latency operations for all clients.
 
