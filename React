@@ -2,6 +2,19 @@ React:
 
 Lify cycle:
 
+      https://reactjs.org/docs/state-and-lifecycle.html
+
+      https://programmingwithmosh.com/javascript/react-lifecycle-methods/
+
+      Every component in React goes through a lifecycle of events. I like to think of them as going through a cycle of birth, growth, and death.
+
+      Mounting – Birth of your component
+      Update – Growth of your component
+      Unmount – Death of your component
+      Now that we understand the series of lifecycle events let’s learn more about how they work.
+
+      https://programmingwithmosh.com/javascript/react-lifecycle-methods/
+
 componentDidMount
 
 React.FC:       Reacts functional components are simply JavaScript functions, but this doesn’t mean that they don’t follow any constraints. Specifically, and most importantly, functional components take an object of props, which we will need to type.
@@ -30,7 +43,88 @@ Fetch API:  Fetch is a new-ish, promise-based API that lets us do Ajax requests 
 Axios vs Fetch:
 
 ************************************************************
+
+Life Cycle:
+
+  https://reactjs.org/docs/state-and-lifecycle.html
+  
+  https://programmingwithmosh.com/javascript/react-lifecycle-methods/
+  
+  https://medium.com/javascript-scene/javascript-es6-var-let-or-const-ba58b8dcde75
+  
+PropTypes:
+      
+      https://reactjs.org/docs/typechecking-with-proptypes.html
+      
+      https://www.geeksforgeeks.org/reactjs-proptypes/
+      
+      https://blog.bitsrc.io/understanding-react-proptypes-type-checking-in-react-9648a62ce12e
+    
+      https://css-tricks.com/props-and-proptypes-in-react/
+      
+    
+Exeption Handling:
+
+      https://www.smashingmagazine.com/2020/06/react-error-handling-reporting-error-boundary-sentry/
+      
+      https://reactjs.org/blog/2017/07/26/error-handling-in-react-16.html
+      
+      
 Async, Await
 
 https://medium.com/javascript-scene/javascript-es6-var-let-or-const-ba58b8dcde75
 
+https://levelup.gitconnected.com/usetypescript-a-complete-guide-to-react-hooks-and-typescript-db1858d1fb9c                     [React Hooks]
+
+https://levelup.gitconnected.com/using-react-functional-components-with-hooks-in-typescript-6d61075edddc                       [React FC] 
+
+https://levelup.gitconnected.com/a-guide-to-service-workers-in-react-js-82aec1d6a22d                                            [Service Workers]
+
+Store:
+
+    https://stackoverflow.com/questions/48356854/storing-data-in-react
+    
+    https://react-redux.js.org/using-react-redux/accessing-store?_sm_au_=iVVMDMqwk5FTLNtPscpQ8KHVVHCJF
+    
+    https://www.freecodecamp.org/news/where-do-i-belong-a-guide-to-saving-react-component-data-in-state-store-static-and-this-c49b335e2a00/
+    
+    https://www.robinwieruch.de/local-storage-react
+    
+    
+
+Testing:
+    https://testing-library.com/docs/dom-testing-library/cheatsheet
+    
+    https://testing-library.com/docs/react-testing-library/cheatsheet
+    
+    https://jestjs.io/docs/en/tutorial-react
+    
+Antd:
+
+    https://ant.design/docs/spec/reaction
+
+https://create-react-app.dev/docs/making-a-progressive-web-app/
+
+Responsive App:
+
+https://codeburst.io/how-to-build-fully-responsive-react-apps-with-nothing-but-inline-styles-and-javascript-242c091b6ba1
+
+https://medium.com/@mustwin/responsive-react-9b56d63c4edc
+
+https://www.npmjs.com/package/react-responsive
+
+
+
+
+FAQs:
+
+  https://www.edureka.co/blog/interview-questions/react-interview-questions/
+  
+  https://medium.com/@vigowebs/frequently-asked-react-js-interview-questions-and-answers-36f3dd99f486
+  
+  https://www.fullstack.cafe/blog/react-js-interview-questions
+  
+  https://medium.com/javascript-scene/javascript-es6-var-let-or-const-ba58b8dcde75
+  
+  
+  
