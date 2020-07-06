@@ -1,0 +1,36 @@
+React:
+
+Lify cycle:
+
+componentDidMount
+
+React.FC:       Reacts functional components are simply JavaScript functions, but this doesn’t mean that they don’t follow any constraints. Specifically, and most importantly, functional components take an object of props, which we will need to type.
+                Creating a functional component in TypeScript we first need to use the type React.FC, which is based on the FunctionComponent interface:
+  
+                
+
+Axios:  Axios is among the most popular promise based HTTP clients for both browsers and Node.js.
+        Axios provides support for request and response interceptors, transformers and auto-conversion to JSON. It’s also protecting you by default against cross-site request forgery (XSRF).
+        Axios is promise-based and thus we can take advantage of async and await for more readable asynchronous code. We can also intercept and cancel requests, and there’s built-in client side protection against cross site request forgery. But the best part about Axios? The easy to use API!
+      
+      
+      https://designrevision.com/react-axios/
+        
+Fetch API:  Fetch is a new-ish, promise-based API that lets us do Ajax requests without all the fuss associated with XMLHttpRequest. As you’ll see in this post, Fetch is very easy to use and work with and greatly simplifies fetching resources from an API. Plus, it’s now supported in all modern browsers, so using Fetch is really a no-brainer.
+            Let’s demonstrate a simple GET request by going and GET ourselves some dummy data from the JSONPlaceholder API:
+
+            fetch('https://jsonplaceholder.typicode.com/users')
+              .then(res => res.json())
+              .then(res => res.map(user => user.username))
+              .then(userNames => console.log(userNames));
+
+
+          https://alligator.io/js/fetch-api/
+
+Axios vs Fetch:
+
+************************************************************
+Async, Await
+
+https://medium.com/javascript-scene/javascript-es6-var-let-or-const-ba58b8dcde75
+
