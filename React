@@ -125,6 +125,10 @@ https://www.npmjs.com/package/react-responsive
 
 FAQs:
 
+  https://reactjs.org/docs/hooks-reference.html                                           { Hooks }
+  
+  https://kentcdodds.com/blog/the-state-reducer-pattern-with-react-hooks            { Reducer pattern }
+
   https://www.edureka.co/blog/interview-questions/react-interview-questions/
   
   https://medium.com/@vigowebs/frequently-asked-react-js-interview-questions-and-answers-36f3dd99f486
@@ -133,5 +137,27 @@ FAQs:
   
   https://medium.com/javascript-scene/javascript-es6-var-let-or-const-ba58b8dcde75
   
+  https://medium.com/@theflyingmantis/async-await-react-promise-testing-a0d454b5461b { Async, Await & React promise }
+  
+  https://reactjs.org/docs/forms.html#controlled-components { Controlled Components }
+  
+  https://medium.com/javascript-in-plain-english/how-to-use-async-function-in-react-hook-useeffect-typescript-js-6204a788a435  { async & useEffect }
+  
+  https://www.robinwieruch.de/react-hooks-fetch-data { Data Fetch with React Hooks }
+  
+  https://medium.com/@miloshn/how-to-fetch-data-using-reacthooks-and-async-await-in-react-3ab137c63a2e { Data Fetch with React Hooks  using Async / Await }
+  
+  https://stackoverflow.com/questions/53146795/react-usereducer-async-data-fetch { React useReducer async data fetch }
+  
+  https://medium.com/javascript-in-plain-english/handling-api-calls-using-async-await-in-useeffect-hook-990fb4ae423 { Handling API calls with Async await with useEffect hook }
+  
+  https://stackoverflow.com/questions/53898810/executing-async-code-on-update-of-state-with-react-hooks
+  
+  https://dev.to/silvestricodes/asynchronous-flows-with-react-hooks-1g0m
   
   
+  
+  https://medium.com/@theflyingmantis/callbacks-vs-promises-and-basics-of-js-80d3d1515e81
+  
+  
+  https://www.tiny.cloud/docs/integrations/react/  { Text editor for content, formatting & impage}
