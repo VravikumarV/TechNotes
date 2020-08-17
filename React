@@ -2,7 +2,7 @@ React:
 
 
 React class components vs functional components:   https://medium.com/@Zwenza/functional-vs-class-components-in-react-231e3fbd7108
-
+https://github.com/acdlite/recompose
 
      Function Components vs class:
      Highorder components:
@@ -29,24 +29,37 @@ React class components vs functional components:   https://medium.com/@Zwenza/fu
      React.memo:                     
      Promises:    
                   Mounting:
+                  
+                         constructor()                                          (1)
+                         static getDerivedStateFromProps()                      (2)
+                         render()                                               (3)
+                         componentDidMount()                                    (4)
                         
                   Update:
-                              shouldComponentUpdate(nextProps, nextState):
-                                          Instead of shouldComponentUpdate, consider using the built-in Pu
-                                          reComponent instead of writing shouldComponentUpdate() by hand. PureComponent performs a shallow comparison of props and state, and reduces the chance that you’ll skip a necessary update.
-                                          f you are confident you want to write it by hand, you may compare this.props with nextProps and this.state with nextState and return false to tell React the update can be skipped. Note that returning false does not prevent child components from re-rendering when their state changes.
+                  
+                          static getDerivedStateFromProps(props, state):         (1)
+                                        Is invoked right before calling the render method, both on the initial mount and on subsequent updates.
+                                        It should return an object to update the state, or null to update nothing.
+                              
+                                        Deriving state leads to verbose code and makes your components difficult to think about.
+                                        Make sure you’re familiar with simpler alternatives:
+                                        If you need to perform a side effect (for example, data fetching or an animation) in response to a change in props, use componentDidUpdate lifecycle instead.
+                                        If you want to re-compute some data only when a prop changes, use a memoization helper instead.
+                                        If you want to “reset” some state when a prop changes, consider either making a component fully controlled or fully uncontrolled with a key instead.
+
+                         shouldComponentUpdate(nextProps, nextState):           (2)
+                                          Instead of shouldComponentUpdate, consider using the built-in PureComponent instead of writing shouldComponentUpdate() by hand. PureComponent performs a shallow comparison of props and state, and reduces the chance that you’ll skip a necessary update.
+                                          If you are confident you want to write it by hand, you may compare this.props with nextProps and this.state with nextState and return false to tell React the update can be skipped. Note that returning false does not prevent child components from re-rendering when their state changes.
                                           We do not recommend doing deep equality checks or using JSON.stringify() in shouldComponentUpdate(). It is very inefficient and will harm performance
 
-                              static getDerivedStateFromProps(props, state):  Is invoked right before calling the render method, both on the initial mount and on subsequent updates.
-                              It should return an object to update the state, or null to update nothing.
-                              
-                              Deriving state leads to verbose code and makes your components difficult to think about.
-                                    Make sure you’re familiar with simpler alternatives:
-                                    If you need to perform a side effect (for example, data fetching or an animation) in response to a change in props, use componentDidUpdate lifecycle instead.
-                                    If you want to re-compute some data only when a prop changes, use a memoization helper instead.
-                                    If you want to “reset” some state when a prop changes, consider either making a component fully controlled or fully uncontrolled with a key instead.
+                         render()
+                         getSnapshotBeforeUpdate()
+                         componentDidUpdate()
 
-                  UnMounting
+
+                  UnMounting:
+                  
+                  
 
 
                   Error boundaries:       Error boundaries only catch errors in the components below them in the tree. An error boundary can’t catch an error within itself.
