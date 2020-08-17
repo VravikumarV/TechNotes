@@ -14,9 +14,73 @@ Lify cycle:
       Now that we understand the series of lifecycle events let’s learn more about how they work.
 
       https://programmingwithmosh.com/javascript/react-lifecycle-methods/
+      
+      
+      React Before Hooks vs Afetr Hooks:
+      
+      Redux & Redux Alternatives:
+      
+     Function Components vs class:
+     Highorder components:
+     
+     Controlled Components:         In React, mutable state is typically kept in the state property of components, and only updated with setState().
+     Fully Controlled Components:
+     UnCOntrolled Components:
+     React.Component:
+     React.PureComponent:
+     React.Fragment:                React also provides a component for rendering multiple elements without a wrapper.
+     React.Suspense:                Suspense lets components “wait” for something before rendering. Today, Suspense only supports one use case: loading components dynamically with React.lazy. In the future, it will support other use cases like data fetching.
+     React.Lazy:                    React.lazy() lets you define a component that is loaded dynamically. This helps reduce the bundle size to delay loading components that aren’t used during the initial render.
+                              const SomeComponent = React.lazy(() => import('./SomeComponent'));
+                              Note that rendering lazy components requires that there’s a <React.Suspense> component higher in the rendering tree. This is how you specify a loading indicator.
+                              Note
+                              Using React.lazywith dynamic import requires Promises to be available in the JS environment. This requires a polyfill on IE11 and below.
 
-componentDidMount
+                              Note:
+                                          React.lazy() and <React.Suspense> are not yet supported by ReactDOMServer. This is a known limitation that will be resolved in the future.
 
+     React.createRef:
+     React.forwardRef:
+     React.memo:                     
+     Promises:    
+                  Mounting:
+                        
+                  Update:
+                              shouldComponentUpdate(nextProps, nextState):
+                                          Instead of shouldComponentUpdate, consider using the built-in Pu
+                                          reComponent instead of writing shouldComponentUpdate() by hand. PureComponent performs a shallow comparison of props and state, and reduces the chance that you’ll skip a necessary update.
+                                          f you are confident you want to write it by hand, you may compare this.props with nextProps and this.state with nextState and return false to tell React the update can be skipped. Note that returning false does not prevent child components from re-rendering when their state changes.
+                                          We do not recommend doing deep equality checks or using JSON.stringify() in shouldComponentUpdate(). It is very inefficient and will harm performance
+
+                              static getDerivedStateFromProps(props, state):  Is invoked right before calling the render method, both on the initial mount and on subsequent updates.
+                              It should return an object to update the state, or null to update nothing.
+                              
+                              Deriving state leads to verbose code and makes your components difficult to think about.
+                                    Make sure you’re familiar with simpler alternatives:
+                                    If you need to perform a side effect (for example, data fetching or an animation) in response to a change in props, use componentDidUpdate lifecycle instead.
+                                    If you want to re-compute some data only when a prop changes, use a memoization helper instead.
+                                    If you want to “reset” some state when a prop changes, consider either making a component fully controlled or fully uncontrolled with a key instead.
+
+                  UnMounting
+
+
+                  Error boundaries:       Error boundaries only catch errors in the components below them in the tree. An error boundary can’t catch an error within itself.
+
+                        Error boundaries are React components that catch JavaScript errors anywhere in their child component tree, log those errors, and display a fallback UI instead of the component tree that crashed. Error boundaries catch errors during rendering, in lifecycle methods, and in constructors of the whole tree below them.
+                        A class component becomes an error boundary if it defines either (or both) of the lifecycle methods static getDerivedStateFromError() or componentDidCatch(). Updating state from these lifecycles lets you capture an unhandled JavaScript error in the below tree and display a fallback UI.
+
+                  static getDerivedStateFromError(error):
+                  componentDidCatch(error, info):
+                  
+                  
+  React Profiler (Frtom React 16.5): Collect tioming information to identify performance bottlenecks in react applications.
+  
+  
+Time slicling & suspence features:
+
+PureComponent:
+
+TransitionCOmponent:
 React.FC:       Reacts functional components are simply JavaScript functions, but this doesn’t mean that they don’t follow any constraints. Specifically, and most importantly, functional components take an object of props, which we will need to type.
                 Creating a functional component in TypeScript we first need to use the type React.FC, which is based on the FunctionComponent interface:
   
