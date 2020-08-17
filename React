@@ -1,43 +1,13 @@
 React:
 
-Lify cycle:
 
-      https://reactjs.org/docs/state-and-lifecycle.html
+React class components vs functional components:   https://medium.com/@Zwenza/functional-vs-class-components-in-react-231e3fbd7108
 
-      https://programmingwithmosh.com/javascript/react-lifecycle-methods/
 
-      Every component in React goes through a lifecycle of events. I like to think of them as going through a cycle of birth, growth, and death.
-
-      Mounting – Birth of your component
-      Update – Growth of your component
-      Unmount – Death of your component
-      Now that we understand the series of lifecycle events let’s learn more about how they work.
-
-      https://programmingwithmosh.com/javascript/react-lifecycle-methods/
-      
-      
-      React Before Hooks vs Afetr Hooks:
-      
-      Hooks:             Hooks are a new addition in React 16.8. They let you use state and other React features without writing a class. Hooks have a dedicated docs section and a separate API reference:
-            Basic Hooks
-                        useState
-                        useEffect
-                        useContext
-            Additional Hooks
-                        useReducer
-                        useCallback
-                        useMemo
-                        useRef
-                        useImperativeHandle
-                        useLayoutEffect
-                        useDebugValue
-
-      
-      Redux & Redux Alternatives:
-      
      Function Components vs class:
      Highorder components:
-     
+      PureComponent:
+
      Controlled Components:         In React, mutable state is typically kept in the state property of components, and only updated with setState().
      Fully Controlled Components:
      UnCOntrolled Components:
@@ -87,13 +57,48 @@ Lify cycle:
                   static getDerivedStateFromError(error):
                   componentDidCatch(error, info):
                   
+
+Lify cycle:
+
+      https://reactjs.org/docs/state-and-lifecycle.html
+
+      https://programmingwithmosh.com/javascript/react-lifecycle-methods/
+
+      Every component in React goes through a lifecycle of events. I like to think of them as going through a cycle of birth, growth, and death.
+
+      Mounting – Birth of your component
+      Update – Growth of your component
+      Unmount – Death of your component
+      Now that we understand the series of lifecycle events let’s learn more about how they work.
+
+      https://programmingwithmosh.com/javascript/react-lifecycle-methods/
+      
+      
+      React Before Hooks vs Afetr Hooks:
+      
+      Hooks:             Hooks are a new addition in React 16.8. They let you use state and other React features without writing a class. Hooks have a dedicated docs section and a separate API reference:
+            Basic Hooks
+                        useState
+                        useEffect
+                        useContext
+            Additional Hooks
+                        useReducer
+                        useCallback
+                        useMemo
+                        useRef
+                        useImperativeHandle
+                        useLayoutEffect
+                        useDebugValue
+
+      
+      Redux & Redux Alternatives:
+      
                   
   React Profiler (Frtom React 16.5): Collect tioming information to identify performance bottlenecks in react applications.
   
   
 Time slicling & suspence features:
 
-PureComponent:
 
 TransitionCOmponent:
 React.FC:       Reacts functional components are simply JavaScript functions, but this doesn’t mean that they don’t follow any constraints. Specifically, and most importantly, functional components take an object of props, which we will need to type.
