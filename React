@@ -18,6 +18,21 @@ Lify cycle:
       
       React Before Hooks vs Afetr Hooks:
       
+      Hooks:             Hooks are a new addition in React 16.8. They let you use state and other React features without writing a class. Hooks have a dedicated docs section and a separate API reference:
+            Basic Hooks
+                        useState
+                        useEffect
+                        useContext
+            Additional Hooks
+                        useReducer
+                        useCallback
+                        useMemo
+                        useRef
+                        useImperativeHandle
+                        useLayoutEffect
+                        useDebugValue
+
+      
       Redux & Redux Alternatives:
       
      Function Components vs class:
