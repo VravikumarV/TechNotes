@@ -177,7 +177,7 @@ Lify cycle:
                               https://redux.js.org/introduction/motivation
                               https://redux.js.org/introduction/getting-started
                               https://redux.js.org/introduction/three-principles
-      Redux:            
+      Redux:         A predictable state container for JavaScript applications   
       
                 npm install @reduxjs/toolkit
                 npm install redux
@@ -237,11 +237,11 @@ Lify cycle:
                
                Redux Application Data Flow: Earlier, we talked about "one-way data flow", which describes this sequence of steps to update the app:
 
-State describes the condition of the app at a specific point in time
-The UI is rendered based on that state
-When something happens (such as a user clicking a button), the state is updated based on what occurred
-The UI re-renders based on the new state
-For Redux specifically, we can break these steps into more detail:
+                         State describes the condition of the app at a specific point in time
+                         The UI is rendered based on that state
+                         When something happens (such as a user clicking a button), the state is updated based on what occurred
+                         The UI re-renders based on the new state
+                         For Redux specifically, we can break these steps into more detail:
 
           Initial setup:
                          A Redux store is created using a root reducer function
