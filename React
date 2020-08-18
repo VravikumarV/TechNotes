@@ -85,9 +85,77 @@ Lify cycle:
       Now that we understand the series of lifecycle events let’s learn more about how they work.
 
       https://programmingwithmosh.com/javascript/react-lifecycle-methods/
+      ES6:     https://medium.com/the-andela-way/a-beginners-guide-to-react-with-es6-a2ed0b5c977e
+      Basics:  https://medium.com/the-andela-way/understanding-the-fundamentals-of-state-in-react-79c711be677f
       
       Routers:
       
+                    https://reactrouter.com/native/guides/quick-start
+                    https://medium.com/the-andela-way/understanding-the-fundamentals-of-routing-in-react-b29f806b157e
+      
+                    react-router:            A core library
+                    react-router-dom:        A variant of core library meant to be used for we applications
+                    react-router-native:     A variant of the core library used with react native in the development of Android and iOS applications.
+      
+                    npm install --save react-router-dom
+                    
+                    There are number of routers available each corresponds to a particular platform. Those include the following...
+                                             BrowserRouter:      Dynamic (server based applications)
+                                             HashRouter:         Static web sites
+                                             MemoryRouter:       
+                    Worth noting is that any router expects to receive only one child.
+                    
+                         ReactDOM.render(
+                                          <BrowserRouter>
+                                            <App/>
+                                          </BrowserRouter>,
+                                          document.getElementById(‘root’));     -- BrowserRouter should have only one child, in this case its <App/> component.
+                     
+                    
+                    History:                 Each router creates a history objects which it uses to old the location and re-renders the appliction when the location changes.
+                    
+                                        <Route path="/items" />
+                                        <Route exact path="/items" />
+                                        
+                                        Route is having 3 props which decides which needs to be frendered.
+                                        1. Component:       <Route exact path=”/items” component={Items} />
+                                        2. render:          <Route exact path=”/items” render = {() => (<div>List of Items</div>)}  />
+                                        3. Children:        <Route children={props => <Items {…props}/>}/>
+                   Switch:               
+                                        <Switch>
+                                          <Route 
+                                            path=”/items” 
+                                            render={() => (<div><em>List of items</em></div>)}
+                                          />
+                                          <Route 
+                                            path=”/items/2" 
+                                            render={() => (<div>Item with id of 2</div>)}
+                                          />
+                                        </Switch>
+                    Link:          <Link/> It is similar to HTML’s anchor element but the main difference is that using the Link component does not reload the page but rather, changes the UI. 
+                    
+                    
+                                                            export const Home = () => (
+                                                                                  <div>
+                                                                                    Home Component
+                                                                                    <ul>
+                                                                                      <li>
+                                                                                        <Link to=”/items”>Items</Link>
+                                                                                      </li>
+                                                                                      <li>
+                                                                                        <Link to=”/category”>Category</Link>
+                                                                                       </li>
+                                                                                    </ul>
+                                                                                  </div>
+                                                                                );
+                                                                                
+                    Nested Routing:     
+                    
+                    Protected Routes:
+                    
+                    Custom Routes:
+
+                    
       React Before Hooks vs Afetr Hooks:
       
       Hooks:             Hooks are a new addition in React 16.8. They let you use state and other React features without writing a class. Hooks have a dedicated docs section and a separate API reference:
@@ -106,8 +174,89 @@ Lify cycle:
 
       
       Redux & Redux Alternatives:
+                              https://redux.js.org/introduction/motivation
+                              https://redux.js.org/introduction/getting-started
+                              https://redux.js.org/introduction/three-principles
+      Redux:            
       
-                  
+                npm install @reduxjs/toolkit
+                npm install redux
+                
+                npx create-react-app my-app --template redux
+                
+                Redux is more useful when:
+
+                              You have large amounts of application state that are needed in many places in the app
+                              The app state is updated frequently over time
+                              The logic to update that state may be complex
+                              The app has a medium or large-sized codebase, and might be worked on by many people
+               
+               Immutablity & Mutabaility:    
+               Store:    The current Redux application state lives in an object called the store .
+                         The store is created by passing in a reducer, and has a method called getState that returns the current state value
+               Actions:
+               Action Creators:
+               Reducers:   This is a reducer, a pure function with (state, action) => state signature. It describes how an action transforms the state into the next state.    
+
+                    Create a Redux store holding the state of your app. Use Its API is { subscribe, dispatch, getState }.
+
+                    Example:
+                              function counter(state = 0, action) {
+                                switch (action.type) {
+                                  case 'INCREMENT':
+                                    return state + 1
+                                  case 'DECREMENT':
+                                    return state - 1
+                                  default:
+                                    return state
+                                }
+                              }
+
+                              // Create a Redux store holding the state of your app.
+                              // Its API is { subscribe, dispatch, getState }.
+                              let store = createStore(counter)
+
+                              // You can use subscribe() to update the UI in response to state changes.
+                              // Normally you'd use a view binding library (e.g. React Redux) rather than subscribe() directly.
+                              // However it can also be handy to persist the current state in the localStorage.
+
+                              store.subscribe(() => console.log(store.getState()))
+
+                              // The only way to mutate the internal state is to dispatch an action.
+                              // The actions can be serialized, logged or stored and later replayed.
+                              store.dispatch({ type: 'INCREMENT' })
+
+                    Reducers must always follow some specific rules:
+
+                         They should only calculate the new state value based on the state and action arguments
+                         They are not allowed to modify the existing state. Instead, they must make immutable updates, by copying the existing state and making changes to the copied values.
+                         They must not do any asynchronous logic, calculate random values, or cause other "side effects"
+               Dispatch: 
+                              The Redux store has a method called dispatch. The only way to update the state is to call store.dispatch() and pass in an action object. The store will run its reducer function and save the new state value inside, and we can call getState() to retrieve the updated value:
+               Selectors:     Selectors are functions that know how to extract specific pieces of information from a store state value. As an application grows bigger, this can help avoid repeating logic as different parts of the app need to read the same data:
+               
+               Redux Application Data Flow: Earlier, we talked about "one-way data flow", which describes this sequence of steps to update the app:
+
+State describes the condition of the app at a specific point in time
+The UI is rendered based on that state
+When something happens (such as a user clicking a button), the state is updated based on what occurred
+The UI re-renders based on the new state
+For Redux specifically, we can break these steps into more detail:
+
+          Initial setup:
+                         A Redux store is created using a root reducer function
+                         The store calls the root reducer once, and saves the return value as its initial state
+                         When the UI is first rendered, UI components access the current state of the Redux store, and use that data to decide what to render. They also subscribe to any future store updates so they can know if the state has changed.
+          Updates:
+                         Something happens in the app, such as a user clicking a button
+                         The app code dispatches an action to the Redux store, like dispatch({type: 'counter/increment'})
+                         The store runs the reducer function again with the previous state and the current action, and saves the return value as the new state
+                         The store notifies all parts of the UI that are subscribed that the store has been updated
+                         Each UI component that needs data from the store checks to see if the parts of the state they need have changed.
+                         Each component that sees its data has changed forces a re-render with the new data, so it can update what's shown on the screen.
+          
+
+
   React Profiler (Frtom React 16.5): Collect tioming information to identify performance bottlenecks in react applications.
   
   
@@ -148,6 +297,12 @@ Fetch API:  Fetch is a new-ish, promise-based API that lets us do Ajax requests 
 Axios vs Fetch:
 
 ************************************************************
+
+https://medium.com/the-andela-way/understanding-the-fundamentals-of-routing-in-react-b29f806b157e
+
+
+What is SPA (Single page application) ? How does tyhat work and is React an SPA ?
+Responsive Design. ?
 
 Life Cycle:
 
