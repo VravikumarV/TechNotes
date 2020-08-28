@@ -1,0 +1,64 @@
+
+
+
+NodeJs:      Node JS is a JavaScript runtime built on Chrome’s V8 JavaScript engine that uses an event-driven, non-blocking I/O model to achieve efficiency while remaining lightweight.
+
+NodeJS life cycle:
+
+Event driven
+Asynchronous nature
+Non-Blocking IO (Event Loops)
+Single Threaded
+
+It compiles JavaScript directly to native machine code before executing it, allowing it to achieve fantastic runtime performance.
+
+Asynchronous(Non Blocking): Unlike PHP, Node JS is asynchronous, so requests can be handled without having any dependency on one another, which improves efficiency and throughput. This design pattern is known as non-blocking code execution.
+
+Single Threaded:   Using the single threaded event loop model, Node JS is able to handle multiple concurrent clients without creating multiple threads. This removes the performance cost of thread context switching and prevents errors arising from incorrect thread synchronization, which can be extremely hard to troubleshoot.
+
+Because Node JS adopted popular server-side development patterns, it can be readily combined with a browser or database that supports JSON for a unified JavaScript development stack.
+
+Data Streams:      Node JS applications never buffer any data thanks to the Stream module, which is an abstract interface for working with streaming data that makes it easy to build objects that implement the stream interface. The ability to easily output data in chunks gives Node JS developers the power of composability in their code and makes the JavaScript runtime particularly suited for building scalable network applications.
+
+The NodeJs JavaScript language doesn’t block I/O – meaning input/output communication method. Another benefit is single-threaded event loop, that is responsible for abstracting I/O from external requests. Speaking plainly, this means that Node initiates the event loop at the start, processes the input, and begins the order of operations.
+
+
+Fault tolerance
+Scalability
+Per process and across serveres: Multi core servers
+
+Pre-requisition for environment:
+NPM requirements:
+Development tools and s/w:
+Coding
+Testing
+Building 
+Packaging
+Deployment:
+
+
+How node consumes memory, cpu utilization and large scale processing applications.
+
+Usecases: 
+        Client & Server side applications
+        Chatbots
+        IO & Network
+        Streaming
+        AI & ML
+        IOT & Robotics (Micro contraollers). low.js
+        API integration (Apigee)
+
+Why ndeJS:
+
+NodeJS Capabilities and Features:
+
+When to use NodeJs:
+
+
+
+
+Node upcoming projects :  NodeOS, Node-Webkit, log.io, low.js, Nodecast, Nexe
+
+Resources:
+
+https://thinkmobiles.com/blog/why-use-nodejs/
