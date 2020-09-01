@@ -1,5 +1,46 @@
+Statically Type and DYnmic Typed, String type vs Dynamic Type Language:
 
-https://smallpdf.com/shared#st=c848a7d8-e538-473f-b10b-6f9c4b4f87b9&fn=Payslip_FEBRUARY_2020-merged.pdf&ct=1584768520333&tl=merge&rf=link
+https://www.sitepoint.com/typing-versus-dynamic-typing/
+Static typed programming languages are those in which variables need not be defined before they’re used. Java, C, C++
+Java is static type language, you need to declare data type before you using and variables.
+Java is static type language, you need to declare data type before you using and variables.
+
+Dynamic typed programming languages are those languages in which variables must necessarily be defined before they are used. This implies that dynamic typed languages do not require the explicit declaration of the variables before they’re used. 
+Python & PHP are example for the same. eg: num = 10; define with out declaration (data type) of num variable.
+
+
+String type vs week type:
+
+Programming languages in which variables have specific data types are strong typed. This implies that in strong typed languages, variables are necessarily bound to a particular data type. Python is strong typed, and so is Java.
+/* Python code */ 
+>>> foo = "x" 
+>>> foo = foo + 2 
+TypeError: cannot concatenate 'str' and 'int' objects 
+
+weak typed languages are those in which variables are not of a specific data type. It should be noted that this does not imply that variables do not have types; it does mean that variables are not "bound" to a specific data type. PHP and C are examples of weak typed languages.
+
+ Python is dynamic typed and strong typed; Java is static typed and strong typed; PHP is dynamic typed and weak typed; C is static typed and weak typed (owing to its casting ability).
+ 
+ Dynamic Typing is Good
+In a dynamic typed language, you don’t have to initialize variables, which is a big bonus for many developers. Programmers like the fact that you can use a variable at will when required (without having to initialize it). Dynamic typing is characteristic of many of the scripting languages: Perl, PHP, Python, etc. Dynamic typing, in fact, does save you from writing a few "extra" lines of code, which, in turn, means less time spent writing code.
+
+Call BVy Value & Call By Refrence:
+
+https://www.geeksforgeeks.org/difference-between-call-by-value-and-call-by-reference/
+ava always passes parameter variables by value. Object variables in Java always point to the real object in the memory heap. A mutable object's value can be changed when it is passed to a method. ...
+
+
+Functions can be invoked in two ways: Call by Value or Call by Reference. These two ways are generally differentiated by the type of values passed to them as parameters.
+
+The parameters passed to function are called actual parameters whereas the parameters received by function are called formal parameters.
+
+Call By Value: In this parameter passing method, values of actual parameters are copied to function’s formal parameters and the two types of parameters are stored in different memory locations. So any changes made inside functions are not reflected in actual parameters of the caller.
+
+Call by Reference: Both the actual and formal parameters refer to the same locations, so any changes made inside the function are actually reflected in actual parameters of the caller.
+
+
+
+
 
 JDK 9
 **************
