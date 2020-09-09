@@ -24,6 +24,30 @@ Threading & Concurrency:
 ***************************************************************************************     
 1. Spring cloud provides client side load balancing through the use of Netflx ribbon.Ribbon's load balancing mechanism can be supplemented with retries.
 
+Circuit Breaker:
+
+1. Netflix:
+	<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-hystrix</artifactId>
+    <version>1.4.7.RELEASE</version>
+</dependency>
+For the Circuit Breaker to work, Hystix will scan @Component or @Service annotated classes for @HystixCommand annotated methods, implement a proxy for it and monitor its calls.
+
+1. On RestTemplate
+2. FeignClient inerface (@EnableFeignClients)
+
+
+@EnableCircuitBreaker   [will scan the classpath for any compatible Circuit Breaker implementation.]
+@EnableHystrix          [To use Hystrix explicitly, use this annotation onspecific Service or Component]
+
+For the Circuit Breaker to work, Hystix will scan @Component or @Service annotated classes for @HystixCommand annotated methods, implement a proxy for it and monitor its calls.
+@HystrixCollapser
+Normally a @HytrixCommand annotated method is executed in a thread pool context. 
+
+@HystrixCommand(fallbackMethod = "getSomeDefault", commandProperties = {
+  @HystrixProperty(name = "execution.isolation.strategy", value = "SEMAPHORE")
+})
 
 Native cloud applications & Cloud design Principles:
 
