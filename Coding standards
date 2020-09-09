@@ -1,0 +1,103 @@
+System Design & Patterns:
+
+      1. Singletones are anti patterns so better to use it with caution. DI frameworks like Spring will use Singletones often.
+      2. Single Threaded vs Thread Safe Singletone
+      3. Interface variables are public and static but not final by default.
+      4. Servlets are single threaded by default. Servlet Container creates multiple instances and manages them based on requests.
+      5. Spring Boot MVC is 
+      
+ 
+   
+Threading & Concurrency:
+      1. Accessing volatile memory is quite an expensive affair because it involves reaching out to main memory.
+      
+1. Java
+      1. Try avoiding synchronized methods (To keep state as thread safe). Instead declare the state variables as volatile and limit the block of code which can lead to state change of those variables.
+      2. Singletone Class: Private variable, No constructor, Intialize the instance (volatile for multi threaded nature) variable of the class, double check on intialization and then create of one doesn't exist else retun the one which is already there.
+         Private Static & Final object intialization from an static Inner Class is another way to create singletone.
+      3. Immutable Class:
+      
+1. Spring
+
+      By Default all spring beans are singletones.
+      
+***************************************************************************************     
+1. Spring cloud provides client side load balancing through the use of Netflx ribbon.Ribbon's load balancing mechanism can be supplemented with retries.
+
+
+Native cloud applications & Cloud design Principles:
+
+Retry & Load Balancing:
+1. Cloud / container enviroment is ephemeral, instances will get created, bounced and recreated so often. In this highly volatile environment, resilience is one of the key aspects of a reliable cloud application.
+By default, there is no delay between the retry attempts.Spring Cloud Ribbon uses Spring Retry‘s NoBackOffPolicy object which does nothing.
+However, we can override the default behavior by extending the RibbonLoadBalancedRetryFactory.
+
+Spring Retry: (Spring Cloud Netflix Ribbon. )
+  <dependency>
+    <groupId>org.springframework.retry</groupId>
+    <artifactId>spring-retry</artifactId>
+  </dependency
+
+@RibbonClient(name = "weather-service", configuration = RibbonConfiguration.class) This Configuration class is to add ping mechanism (to check service availability) and By default its a round robbin configuration
+@LoadBalanced
+
+Spring Retry:
+@EnableRetry
+@Retryable(value = { SQLException.class },maxAttempts = 2,backoff = @Backoff(delay = 5000))
+@Recover annotation is used to define a separate recovery method when a @Retryable method fails with a specified exception:
+RetryOperations & RetryTemplate
+
+weather-service:
+  ribbon:
+    MaxAutoRetries: 3
+    MaxAutoRetriesNextServer: 1
+    retryableStatusCodes: 503, 408, 404, 502
+    OkToRetryOnAllOperations: true
+
+RibbonLoadBalancedRetryFactory: BackOffPolicy, FixedBackOffPolicy (default backoff period is 1 sec between retry attempts) & ExponentialBackOffPolicy
+
+resilience4j Retry: (https://www.baeldung.com/resilience4j-backoff-jitter)
+<dependency>
+    <groupId>io.github.resilience4j</groupId>
+    <artifactId>resilience4j-retry</artifactId>
+</dependency>
+
+RetryConfig config = RetryConfig.custom()
+    .maxAttempts(2)
+    .waitDuration(Duration.ofMillis(100))
+    .retryOnResult(response -> response.getStatus() == 500)
+    .retryOnException(e -> e instanceof WebServiceException)
+    .retryExceptions(IOException.class, TimeoutException.class)
+    .ignoreExceptions(BunsinessException.class, OtherBunsinessException.class)
+    .build();
+
+
+https://cloud.spring.io/spring-cloud-netflix/multi/multi_retrying-failed-requests.html
+***************************************************************************************     
+   Thread Safe Singletone:
+   
+   class Foo {
+    private volatile Helper helper;
+
+    public Helper getHelper() {
+        Helper localRef = helper;
+        if (localRef == null) {     
+            synchronized (this) {
+                localRef = helper;  
+                if (localRef == null) {
+                    helper = localRef = new Helper();
+                }
+            }
+        }
+        return localRef;    
+    }
+    // other functions and members...
+}
+
+
+***************************************************************************************
+Resources:
+
+             https://www.javacodemonk.com/threadsafe-singleton-design-pattern-java-806ad7e6   [V.Good]
+             Is servlet thread safe ? https://stackoverflow.com/questions/9555842/why-servlets-are-not-thread-safe/
+             https://stackoverflow.com/questions/3106452/how-do-servlets-work-instantiation-sessions-shared-variables-and-multithreadi?rq=1 [V.Good]
