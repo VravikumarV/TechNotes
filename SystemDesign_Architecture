@@ -1,0 +1,47 @@
+
+OOPS Principles;
+
+
+
+System Design principles:
+
+Distributed Systems Design Principles:
+
+Concurrency Systems:
+
+
+Multi Threaded Systems:
+
+
+System Architecture:
+
+
+
+GoFF Design Patterns:
+
+
+
+Micro Services:
+
+Hexagonal Systems:
+
+Event Driven Architecture:
+
+Messging systems Architecture:
+
+Integration Prinicples & Architecture:
+
+Domain Driven Design: 
+        Aggregates in Domain Driven Design, however, are supposed to be the fortress of invariants – their main roles are to keep all business rules always fulfilled and provide atomicity of operations.
+
+Test Driven Design:
+
+Micronaut:
+
+UI:
+
+Micro UI Component:
+
+
+High Responsive UI Design Priniples:
+
