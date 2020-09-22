@@ -5,9 +5,18 @@ OOPS Principles;
 
 System Design principles:
 
+Imperative Design:
+
+Functional Design:
+        First thing we provided in our code is a type system – a concept borrowed from functional programming. Instead of having one multipurpose Book class with a status field, and tons of if statements, we delivered AvailableBook and PlacedOnHoldBook  classes instead. In this setup, it is only AvailableBook that has the placeOnHold method.
+        
+
 Distributed Systems Design Principles:
 
+
 Concurrency Systems:
+          When the number of write operations is not that big comparing to read operations, optimistic locking is often a default choice.
+
 
 
 Multi Threaded Systems:
@@ -16,14 +25,15 @@ Multi Threaded Systems:
 System Architecture:
 
 
-
 GoFF Design Patterns:
 
-
+According to Dependency Inversion Principle, modules with higher level of abstraction should not depend upon modules with lower level of abstractions. 
 
 Micro Services:
 
-Hexagonal Systems:
+Hexagonal Systems:      
+                    https://dzone.com/articles/concurrency-control-in-rest-api-with-spring-framew
+                    
 
 Event Driven Architecture:
 
@@ -32,11 +42,22 @@ Messging systems Architecture:
 Integration Prinicples & Architecture:
 
 Domain Driven Design: 
-        Aggregates in Domain Driven Design, however, are supposed to be the fortress of invariants – their main roles are to keep all business rules always fulfilled and provide atomicity of operations.
+        Aggregates in Domain Driven Design, however, are supposed to be the fortress of invariants – their main roles are to keep all business rules always fulfilled and provide atomicity of operations. This means that perform activity B only on outcome of Activity A.
+        
 
 Test Driven Design:
 
 Micronaut:
+
+
+
+Databases:
+
+
+          When the number of write operations is not that big comparing to read operations, optimistic locking is often a default choice.
+
+Separation of Concerns:w
+
 
 UI:
 
@@ -45,3 +66,21 @@ Micro UI Component:
 
 High Responsive UI Design Priniples:
 
+
+
+
+
+Tips:
+
+
+java.lang.Object
+        java.lang.Throwable
+                java.lang.Exception
+                        java.lang.RuntimeException
+                                org.springframework.core.NestedRuntimeException
+                                        org.springframework.dao.DataAccessException
+                                                org.springframework.dao.TransientDataAccessException
+                                                        org.springframework.dao.ConcurrencyFailureException
+                                                                org.springframework.dao.OptimisticLockingFailureException
+                                                                
+org.springframework.orm.ObjectOptimisticLockingFailureException
