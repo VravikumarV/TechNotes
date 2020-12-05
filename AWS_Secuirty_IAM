@@ -1,0 +1,25 @@
+
+
+
+AWS Account vs AWS IAM users
+
+AWS Account: 
+    AWS Account ID: 568058860895
+    Emai: vravikumarv80@gmail.com
+    
+    You use your 12-digit account ID to reference your account programmatically and in other contexts. You use your canonical user ID to configure Amazon S3 access control lists (ACLs).
+
+ 1. Password: You use an email address and password to sign in to secure pages on AWS, such as the AWS Management Console, AWS Forums, and AWS Support. For your protection, create a password that contains many characters, including numbers and punctuation. Store your password securely, do not share it, and change it periodically.
+ 2. Use MFA to increase the security of your AWS environments. Signing in to MFA-protected accounts requires a user name, password, and an authentication code from an MFA device
+ 3. Use access keys to make programmatic calls to AWS from the AWS CLI, Tools for PowerShell, the AWS SDKs, or direct AWS API calls. You can have a maximum of two access keys (active or inactive) at a time.
+ 4. You use key pairs in Amazon CloudFront to create signed URLs. Note: You use different key pairs to launch and access Amazon EC2 instances. Those key pairs are managed in the EC2 console . For your protection, store your key pairs securely and do not share them. In addition, AWS recommends that you change your key pairs periodically.
+Note: You can have a maximum of two CloudFront key pairs (active or inactive) at a time.
+ 5. You use X.509 certificates to make secure SOAP-protocol requests to some AWS services. Note: You use your access keys to make SOAP requests to Amazon S3 and Amazon Mechanical Turk. For your protection, store your private certificate keys securely and do not share them. In addition, AWS recommends that you rotate your certificates periodically.
+Note: You can have a maximum of two X.509 certificates (active or inactive) at a time.
+ 6. You use your 12-digit account ID to reference your account programmatically and in other contexts. You use your canonical user ID to configure Amazon S3 access control lists (ACLs).
+ 
+
+
+https://docs.aws.amazon.com/general/latest/gr/aws-security-credentials.html
+
+To manage credentials for AWS Identity and Access Management (IAM) users, use the IAM Console .
