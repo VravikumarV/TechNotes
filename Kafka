@@ -68,7 +68,16 @@ Streams:
 Topics:
 *********
 
-Rebalance:
+Rebalance:   Moving partition ownership from one consumer to another is called a rebal- ance. Rebalances are important because they provide the consumer group with high availability and scalability.
+
+REBALANCE HAPPENS When we add a new con- sumer to the group and also when consumer group is consuming are modified (e.g., if an administrator adds new partitions).
+
+
+The way consumers maintain membership in a consumer group and ownership of the partitions assigned to them is by sending heartbeats to a Kafka broker designated as the group coordinator (this broker can be different for different consumer groups). As long as the consumer is sending heartbeats at regular in- tervals, it is assumed to be alive, well, and processing messages from its parti- tions. Heartbeats are sent when the consumer polls (i.e., retrieves records) and when it commits records it has consumed.
+
+  THREAD SAFETY
+You can’t have multiple consumers that belong to the same group in one thread and you can’t have multiple threads safely use the same consumer. One consumer per thread is the rule. To run multiple consumers in the same group in one application, you will need to run each in its own thread. It is useful to wrap the consumer logic in its own object and then use Java’s ExecutorService to start mul- tiple threads each with its own consumer. The Confluent blog has a tutorial that shows how to do just that.
+
 
 
 Distributed Mode:
