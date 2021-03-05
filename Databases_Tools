@@ -1,0 +1,52 @@
+
+
+
+Liquibase vs Flyway:
+
+Flyway:   Flyway is an open-source database migration tool. It strongly favors simplicity and convention over configuration.
+
+It is based around just 7 basic commands: Migrate, Clean, Info, Validate, Undo, Baseline and Repair.
+
+Migrations can be written in SQL (database-specific syntax (such as PL/SQL, T-SQL, ...) is supported) or Java (for advanced data transformations or dealing with LOBs).
+
+It has a Command-line client. If you are on the JVM, we recommend using the Java API (also works on Android) for migrating the database on application startup. Alternatively, you can also use the Maven plugin or Gradle plugin.
+
+And if that's not enough, there are plugins available for Spring Boot, Dropwizard, Grails, Play, SBT, Ant, Griffon, Grunt, Ninja and more!
+
+
+
+
+
+ACID Properties: 
+
+  Atomicity:        Transactions are all or nothing. Partial commits wont happen.
+  Consistent:       Only valid data is saved.
+  Isolation:        Transactions do not affect each other.
+  Durability:       Once written will never bbe lost.
+  
+Relational Databases:
+
+NoSql Database:     [ ACID wont apply here ]
+
+
+
+
+Performance:
+
+Types of databases:
+           RDBMS
+           Document
+           Graph
+           Key-Value
+           Column Family
+
+CAP:
+
+Availability:         Clients can always read & write. Remains accessable & operational at all times.
+Consistency:          Clients always have the same view of the data. Commits are atomic across the enitre distributed system.
+Partition Tolerance:  System works well despite of physical network partitions. Only a total network failures can cause system to respond incorrectly.
+
+
+CP:   Risk of some data being unavilable.       [MongoDB, HBase, Memcache, BigTable, Redis]
+AP:   Clients may read inconsistent data       [Cassandra, Dynamo, RIAK, CouchDB]
+CA:   Network problems might stop the system.  [Oracle, PostgreSQL, SQL Server, MySQL, Vertica, Greenplum, Neo4J] 
