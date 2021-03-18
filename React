@@ -225,14 +225,28 @@ Lify cycle:
              Basic Hooks:
                         useState
                         useEffect
-                        useContext
+                        useContext:       const value = useContext(MyContext);
+                        
+                                Accepts a context object (the value returned from React.createContext) and returns the current context value for that context. The current context value is determined by the value prop of the nearest <MyContext.Provider> above the calling component in the tree.
+                                When the nearest <MyContext.Provider> above the component updates, this Hook will trigger a rerender with the latest context value passed to that MyContext provider. Even if an ancestor uses React.memo or shouldComponentUpdate, a rerender will still happen starting at the component itself using useContext.
+
                         
             Additional Hooks:
-                        useReducer
-                        useCallback
-                        useMemo
-                        useRef
-                        useImperativeHandle
+                        useReducer:      const [state, dispatch] = useReducer(reducer, initialArg, init);
+                        An alternative to useState. Accepts a reducer of type (state, action) => newState, and returns the current state paired with a dispatch method. (If you’re familiar with Redux, you already know how this works.)
+                        useReducer is usually preferable to useState when you have complex state logic that involves multiple sub-values or when the next state depends on the previous one. useReducer also lets you optimize performance for components that trigger deep updates because you can pass dispatch down instead of callbacks.
+
+                        useCallback:    useCallback(fn, deps)
+                        useMemo:        useMemo(() => fn, deps)
+                                        const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
+
+                        useRef:         const refContainer = useRef(initialValue);
+                                        useRef returns a mutable ref object whose .current property is initialized to the passed argument (initialValue). The returned object will persist for the full lifetime of the component.
+                                        Essentially, useRef is like a “box” that can hold a mutable value in its .current property.
+  
+                       
+                        useImperativeHandle:      useImperativeHandle(ref, createHandle, [deps])
+                                        
                         useLayoutEffect
                         useDebugValue
                         
