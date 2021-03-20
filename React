@@ -1,4 +1,18 @@
 
+Must Follow (Do's and DoNts):
+-------------------------------------
+[Warning] Warning: componentWillMount has been renamed, and is not recommended for use. See https://fb.me/react-unsafe-component-lifecycles for details. (0.chunk.js, line 131513)
+
+https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html
+
+* Move code with side effects to componentDidMount, and set initial state in the constructor.
+* Rename componentWillMount to UNSAFE_componentWillMount to suppress this warning in non-strict mode. In React 17.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
+
+Please update the following components: UserProfile
+-------------------------------------
+
+
+
 Responsive application design:
 
 1. How do you design and implemenet resuble components ? 
