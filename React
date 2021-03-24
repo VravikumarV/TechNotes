@@ -26,6 +26,22 @@ https://reactjs.org/blog/2016/07/13/mixins-considered-harmful.html
 	promiseReactionJob
 -------------------------------------
 
+https://stackoverflow.com/questions/36897434/error-handling-in-react-best-practices/54573375
+
+1. Error boundries [ From react 16 ] (componentDidCatch):
+         A class component becomes an error boundary if it defines either (or both) of the lifecycle methods static getDerivedStateFromError() or componentDidCatch(). Use static getDerivedStateFromError() to render a fallback UI after an error has been thrown. Use componentDidCatch() to log error information.
+	 
+	Error boundaries work like a JavaScript catch {} block, but for components. Only class components can be error boundaries. In practice, most of the time you’ll want to declare an error boundary component once and use it throughout your application.
+
+			Event handlers (learn more)
+			Asynchronous code (e.g. setTimeout or requestAnimationFrame callbacks)
+			Server side rendering
+			Errors thrown in the error boundary itself (rather than its children)
+2. Try catch		[only works for imperative code:]
+3. 
+
+-------------------------------------
+
 https://reactjs.org/blog/2020/10/20/react-v17.html [ V Imp ]
 UPdating the whole app at once from 15 to 16 or 16 to 17
 
