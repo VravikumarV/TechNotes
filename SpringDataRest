@@ -1,0 +1,47 @@
+Spring Data Rest:		Spring Data REST builds on top of Spring Data repositories, analyzes your application’s domain model and exposes hypermedia-driven HTTP (REST web services) resources for aggregates contained in the model.
+
+RepositoryRestMvcConfiguration	(when used along with Spring MVC)
+RepositoryRestConfigurer		(Used when going with Spring Data Rest as that also comes with Spring MVC)
+
+RepositoryDetectionStrategy:			To determine whether a repository is exposed as a REST resource. 
+RepositoryDiscoveryStrategies:		
+								DEFAULT:			Exposes all public repository interfaces but considers the exported flag of @(Repository)RestResource.
+								ALL:				Exposes all repositories independently of type visibility and annotations.
+								ANNOTATED:		Only repositories annotated with @(Repository)RestResource are exposed, unless their exported flag is set to false.
+								VISIBILITY:		Only public repositories annotated are exposed
+
+@RestResource(exported = false)
+
+spring.data.rest.basePath=/api
+
+
+* 200 OK: For plain GET requests. 
+* 201 Created: For POST and PUT requests that create new resources. 
+* 204 No Content: For PUT, PATCH, and DELETE requests when the configuration is set to not return response bodies for resource updates (RepositoryRestConfiguration.returnBodyOnUpdate). If the configuration value is set to include responses for PUT, 200 OK is returned for updates, and 201 Created is returned for resource created through PUT. 
+If the configuration values (RepositoryRestConfiguration.returnBodyOnUpdate and RepositoryRestConfiguration.returnBodyCreate) are explicitly set to null, the presence of the HTTP Accept header is used to determine the response code.
+
+By default, Spring Data Rest supports methods of CrudRepository ad HATEOS principle (of discovering resource through published links with the returned response).
+
+@RepositoryRestResource:	The default behaviour can be customised with help of this annotation for name and URL 
+
+Collections resources support both GET and POST. All others causes 405 - Method Not Allowed.
+
+
+Collection
+Item
+Search
+Query
+Paging
+Sorting
+Projections:    To include and exclude the embedded resources of a resource. ( Address resource of Person resource)
+			@Projection(name = "noAddresses", types = { Person.class }) 
+			@Projection(name = "passwords", types = { User.class })	To include attributes which are ignored by @JSonIgnore
+			@Projection(name = "virtual", types = { Person.class }).  &   @Value("#{target.firstName} #{target.lastName}") 
+Excerpts:		Another kind of projections to exclude a domain model from Json representation. @RepositoryRestResource(excerptProjection = NoAddresses.class)
+Conditional Operations with headers:
+
+
+https://stackoverflow.com/questions/33422849/spring-data-rest-vs-spring-data-jpa
+https://stackoverflow.com/questions/39053663/spring-data-rest-hal-browser-returning-hal-browser-html-rather-than-root-of
+https://stackoverflow.com/questions/19514131/spring-hateoas-versus-spring-data-rest
+https://dzone.com/articles/spring-boot-microservice-spring-data-rest-and-hate
